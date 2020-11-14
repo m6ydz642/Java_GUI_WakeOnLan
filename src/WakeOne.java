@@ -1,14 +1,26 @@
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+class TurnonButton extends JButton implements ActionListener { // 버튼 액션 정의
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		addActionListener(this);
+	 System.out.println("TurnOnButton 클릭됨");
+		
+	}
+	
+}
 /*****************************************************************/
-class MouseEventClass extends Frame implements MouseListener {
+class MouseEventClass extends Frame implements MouseListener { // 프레임 상에서 x와 y값을 알아내기 위해 생성
 	public MouseEventClass() {
 		addMouseListener(this);
-		System.out.println("this값 : " + this);
+		System.out.println("마우스 이벤트 클릭시 this값 : " + this);
 		
 	}
 	@Override
@@ -52,14 +64,17 @@ public class WakeOne {
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
 		mainframe.setSize(1000, 500); // 프레임 사이즈 
 		mainframe.setLayout(null);
-		TurnonButton.setBounds(52,45,95,30);
+		TurnonButton.setBounds(50,50,95,30); // x, y, height,width 
 		mainframe.add(TurnonButton); // 메인 프레임에 버튼 추가해서 넣기
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
 		MouseEventClass mouseevent = new MouseEventClass(); // 마우스 이벤트 객체 호출
 		// 좌표 설정 할때 사용하려고 만듦
-		mainframe.addMouseListener(mouseevent); // 프레임에 addmouseListenter를 호추하여 mousevent객체 넣음
+		mainframe.addMouseListener(mouseevent); // 프레임에 addmouseListenter를 호출하여 mousevent객체 넣음
+		
+		 TurnonButton Turnbutton = new TurnonButton();
+		TurnonButton.addActionListener(Turnbutton);
 		
 	
 	}
