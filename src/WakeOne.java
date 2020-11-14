@@ -165,15 +165,26 @@ public class WakeOne {
 		mainframe.setLayout(null);
 		TurnonAll.setBounds(47,57,95,30); // x, y, height,width 
 		mainframe.add(TurnonAll); // 메인 프레임에 버튼 추가해서 넣기
-		// TurnonButton.setLocation(40, 0);
+
 		System.out.println("프로그램 실행 콘솔");
 		
-		String ip_text =  contentlist.toString().replaceAll("^\\[", "")
+		String alltext = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
-	//	String ip_text = "123";
+		String[] ip_text = alltext.split(";");
+		System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
+	//	공백 등 toString 자체 양식 제거 (오버라이딩으로 재정의 해서 쓰려고 했는데 안됨 ㅡ.ㅡ;;)
 	
-		ip_mac_view = new JTextField(ip_text); // 객체 생성 하면서 뷰 보여줌
+		String[] macaddress_text;
+		macaddress_text = alltext.split(";");
+		System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
+		ip_mac_view = new JTextField(ip_text[0]); // 객체 생성 하면서 뷰 보여줌
 		 // text field 내용
+		/*
+		 * ip_text[0]는 아이피 
+		 * macaddress_text[1]에는 맥주소 들어있음
+		 * */
+		
+		
 		
 		ip_mac_view.setBounds(281,116,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
@@ -185,24 +196,17 @@ public class WakeOne {
 		 TurnonButton Turnbutton = new TurnonButton();
 		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
 	
-	/*	TurnOnLan IpLoading = new TurnOnLan();
-		Turnbutton.IP(IpLoading.TurnOnLan());*/
-		
-			
+
 		 IpList IpButton = new IpList(); 
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 		
-		/* TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
-*/		 // fileread.FileLoading();
-		 
-		/* List<String> contentlist = new ArrayList<String>();
-		 contentlist = fileread.FileLoading();*/
 		System.out.println("텍스트 내용 읽은 값 : " + contentlist.toString());
 		String asString = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
 		// System.out.println("길이 : " + asString.replaceAll(" ", " ").replace("", ""));
-		System.out.println("길이 : " + asString);
+		String[] test = asString.split(";");
+		System.out.println("길이 : " + test[1]);
 
 
 	}
