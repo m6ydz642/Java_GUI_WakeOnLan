@@ -18,7 +18,7 @@ public class WakeOne {
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
-		// 분기 테스트
+
 		
 	
 	}
