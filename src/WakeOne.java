@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +10,20 @@ import java.net.InetAddress;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.text.JTextComponent;
 
 /*class IP_MAC extends JTextComponent implements SwingConstants { // text필드 정의
 	
 }*/
+/*****************************************************************/
+class IpList extends JButton{ 
+	public Component IpList() {
+		JButton Start = new JButton("부분 부팅 준비");
+		Start.setBounds(626,117,200,30); // 텍스트 필드 
+		return Start;
+	
+
+	}
+}
 /*****************************************************************/
 class TurnOnLan {
 	public static final int PORT = 9;    
@@ -138,7 +147,7 @@ public class WakeOne {
 	public static void main(String[] args) {
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
-		JButton TurnonButton = new JButton("전체 부팅");
+		JButton TurnonAll = new JButton("전체 부팅");
 		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
 		TurnOnLan IP = new TurnOnLan();
 		
@@ -146,17 +155,18 @@ public class WakeOne {
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
 		mainframe.setSize(1000, 500); // 프레임 사이즈 
 		mainframe.setLayout(null);
-		TurnonButton.setBounds(50,50,95,30); // x, y, height,width 
-		mainframe.add(TurnonButton); // 메인 프레임에 버튼 추가해서 넣기
+		TurnonAll.setBounds(47,57,95,30); // x, y, height,width 
+		mainframe.add(TurnonAll); // 메인 프레임에 버튼 추가해서 넣기
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
-		String ip_text = "test";
+		
+		String ip_text = "아이피 주소 로딩칸";
 		
 		ip_mac_view = new JTextField(ip_text); // 객체 생성 하면서 뷰 보여줌
 		 // text field 내용
 		
-		ip_mac_view.setBounds(342,53,200,30);
+		ip_mac_view.setBounds(281,116,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
 		
 		MouseEventClass mouseevent = new MouseEventClass(); // 마우스 이벤트 객체 호출
@@ -164,14 +174,18 @@ public class WakeOne {
 		mainframe.addMouseListener(mouseevent); // 프레임에 addmouseListenter를 호출하여 mousevent객체 넣음
 		
 		 TurnonButton Turnbutton = new TurnonButton();
-		TurnonButton.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
-		
+		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
+	
 	/*	TurnOnLan IpLoading = new TurnOnLan();
 		Turnbutton.IP(IpLoading.TurnOnLan());*/
 		
-
+			
+		 IpList IpButton = new IpList(); 
+		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
+		 System.out.println("iplist 내용 : " + IpButton);
 		
-		
+		 TextLoading a = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
+		 a.name();
 		
 		
 	}
