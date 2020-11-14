@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 class TextLoading{
 	private final static Logger log = Logger.getGlobal();
@@ -28,11 +29,13 @@ class TextLoading{
 				// fileread값에 넣으면서 while문 실행
 				System.out.print((char)fileread); // 강제 형변환
 
-				contentList = Character.toString((char)fileread); // char 타입을 String으로 형변환
+				 contentList = Character.toString((char)fileread); // char 타입을 String으로 형변환
+				
 				System.out.println("contentlist 내용 : " + contentList);
 				content.add(contentList); // 리스트에 추가
+
 			}
-	
+			
 			System.out.println();
 			
 		} catch (Exception e) {
@@ -40,4 +43,5 @@ class TextLoading{
 		}
 		return content; 
 	}
+
 }

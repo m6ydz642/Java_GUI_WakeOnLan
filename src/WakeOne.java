@@ -146,6 +146,8 @@ class MouseEventClass extends Frame implements MouseListener { // 프레임 상�
 
 public class WakeOne {
 
+	
+	
 	public static void main(String[] args) {
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
@@ -153,6 +155,10 @@ public class WakeOne {
 		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
 		TurnOnLan IP = new TurnOnLan();
 		
+		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
+		 List<String> contentlist = new ArrayList<String>();
+		 contentlist = fileread.FileLoading();
+		 
 		mainframe.setDefaultCloseOperation(mainframe.EXIT_ON_CLOSE);
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
 		mainframe.setSize(1000, 500); // 프레임 사이즈 
@@ -162,9 +168,9 @@ public class WakeOne {
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
-		
-		String ip_text = "아이피 주소 로딩칸";
-		
+	//	String ip_text =  contentlist.toString();
+		String ip_text = "123";
+	
 		ip_mac_view = new JTextField(ip_text); // 객체 생성 하면서 뷰 보여줌
 		 // text field 내용
 		
@@ -186,15 +192,21 @@ public class WakeOne {
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 		
-		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
-		 // fileread.FileLoading();
+		/* TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
+*/		 // fileread.FileLoading();
 		 
-		 List<String> contentlist = new ArrayList<String>();
-		 contentlist = fileread.FileLoading();
-		System.out.println("텍스트 내용 읽은 값 : " + contentlist);
-		
-		
-		
+		/* List<String> contentlist = new ArrayList<String>();
+		 contentlist = fileread.FileLoading();*/
+		System.out.println("텍스트 내용 읽은 값 : " + contentlist.toString());
+		System.out.println("길이 : " + contentlist.toString().length());
+
 	}
+
+
+
+
+
+
+
 
 }
