@@ -168,8 +168,9 @@ public class WakeOne {
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
-	//	String ip_text =  contentlist.toString();
-		String ip_text = "123";
+		String ip_text =  contentlist.toString().replaceAll("^\\[", "")
+				.replaceAll("\\]$", "").replace(", ", "");
+	//	String ip_text = "123";
 	
 		ip_mac_view = new JTextField(ip_text); // 객체 생성 하면서 뷰 보여줌
 		 // text field 내용
@@ -198,7 +199,11 @@ public class WakeOne {
 		/* List<String> contentlist = new ArrayList<String>();
 		 contentlist = fileread.FileLoading();*/
 		System.out.println("텍스트 내용 읽은 값 : " + contentlist.toString());
-		System.out.println("길이 : " + contentlist.toString().length());
+		String asString = contentlist.toString().replaceAll("^\\[", "")
+				.replaceAll("\\]$", "").replace(", ", "");
+		// System.out.println("길이 : " + asString.replaceAll(" ", " ").replace("", ""));
+		System.out.println("길이 : " + asString);
+
 
 	}
 
