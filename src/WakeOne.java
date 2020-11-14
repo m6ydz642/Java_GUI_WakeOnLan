@@ -155,9 +155,10 @@ public class WakeOne {
 		ip_mac_view.setBounds(157,152,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
 		
-		MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
+	/*	MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
 		// 좌표 설정 할때 사용하려고 만듦
 		mainframe.addMouseListener(mouseevent); // 프레임에 addmouseListenter를 호출하여 mousevent객체 넣음
+		*/
 		
 		 TurnonButton Turnbutton = new TurnonButton();
 		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
