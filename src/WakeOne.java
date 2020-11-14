@@ -174,14 +174,19 @@ public class WakeOne {
 		System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
 	//	공백 등 toString 자체 양식 제거 (오버라이딩으로 재정의 해서 쓰려고 했는데 안됨 ㅡ.ㅡ;;)
 	
-		String[] macaddress_text;
-		macaddress_text = alltext.split(";");
+		String[] macaddress_text = alltext.split(";");
 		System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
 		ip_mac_view = new JTextField(ip_text[0]); // 객체 생성 하면서 뷰 보여줌
 		 // text field 내용
+;
+		
+		
 		/*
 		 * ip_text[0]는 아이피 
 		 * macaddress_text[1]에는 맥주소 들어있음
+		 * 
+		 * 어쩌다 보니 0 2 4 6 8등 짝수 형태는 아이피
+		 * 홀수 형태는 mac주소가 됨
 		 * */
 		
 		
@@ -200,15 +205,22 @@ public class WakeOne {
 		 IpList IpButton = new IpList(); 
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
-		
+/*		
 		System.out.println("텍스트 내용 읽은 값 : " + contentlist.toString());
 		String asString = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
-		// System.out.println("길이 : " + asString.replaceAll(" ", " ").replace("", ""));
-		String[] test = asString.split(";");
-		System.out.println("길이 : " + test[1]);
+*/	
 
+		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);
 
+		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
+			int j =0;
+			j = i+1; // j에다 i값 플러스
+			System.out.println("i값[" + i + "]" + "아이피 주소 : " + ip_text[i]);
+			System.out.println("j값[" + j + "]" + "맥 주소 : " + macaddress_text[j]);
+			
+		} 
+	
 	}
 
 
