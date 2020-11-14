@@ -1,21 +1,46 @@
 import java.awt.Component;
-import java.awt.Frame;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /*class IP_MAC extends JTextComponent implements SwingConstants { // text필드 정의
+
 	
 }*/
+
+/*****************************************************************/
+class SelectBox{ 
+
+
+
+public Component JComboBox (Object iplist) {
+	//	String country[]={"India","Aus","U.S.A","England","Newzealand"};    
+		JComboBox<Object> cb = new JComboBox();
+		cb.setBounds(433,307,200,30); // 텍스트 필드 
+		System.out.println("Jcombobox호출");
+		System.out.println("JComboBox 리턴값 : " + cb);
+		return cb;
+	
+	}
+
+
+
+
+}
 /*****************************************************************/
 class IpList extends JButton{ 
 	public Component IpList() {
@@ -26,7 +51,6 @@ class IpList extends JButton{
 
 	}
 }
-/*****************************************************************/
 
 
 /*****************************************************************/
@@ -54,7 +78,7 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 }
 
 
-public class WakeOne {
+public class WakeOne extends JFrame{
 
 	
 	
@@ -105,10 +129,10 @@ public class WakeOne {
 		ip_mac_view.setBounds(157,152,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
 		
-	/*	MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
+		MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
 		// 좌표 설정 할때 사용하려고 만듦
 		mainframe.addMouseListener(mouseevent); // 프레임에 addmouseListenter를 호출하여 mousevent객체 넣음
-		*/
+		
 		
 		 TurnonButton Turnbutton = new TurnonButton();
 		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
@@ -118,7 +142,10 @@ public class WakeOne {
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 
-
+		 SelectBox IpSelect = new SelectBox();
+		 Object[] iplist = ip_text;
+		 mainframe.add(IpSelect.JComboBox(iplist));
+		 
 		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);
 
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
