@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -184,8 +186,13 @@ public class WakeOne {
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 		
-		 TextLoading a = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
-		 a.name();
+		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
+		 // fileread.FileLoading();
+		 
+		 List<String> contentlist = new ArrayList<String>();
+		 contentlist = fileread.FileLoading();
+		System.out.println("텍스트 내용 읽은 값 : " + contentlist);
+		
 		
 		
 	}
