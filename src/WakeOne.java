@@ -2,6 +2,9 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +15,60 @@ import javax.swing.text.JTextComponent;
 /*class IP_MAC extends JTextComponent implements SwingConstants { // text필드 정의
 	
 }*/
+/*****************************************************************/
+class TurnOnLan {
+	public static final int PORT = 9;    
+	
+	public void TurnOnLan() {
+		
+	     String ipStr = "192.168.0.35"; // 일단은 하드코딩 된 상태로 둠
+	
+	     
+	        String macStr = "D8-D3-85-00-5A-A9";
+	        
+		 try {
+	            byte[] macBytes = getMacBytes(macStr);
+	            byte[] bytes = new byte[6 + 16 * macBytes.length];
+	            for (int i = 0; i < 6; i++) {
+	                bytes[i] = (byte) 0xff;
+	            }
+	            for (int i = 6; i < bytes.length; i += macBytes.length) {
+	                System.arraycopy(macBytes, 0, bytes, i, macBytes.length);
+	            }
+	            
+	            InetAddress address = InetAddress.getByName(ipStr);
+	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
+	            DatagramSocket socket = new DatagramSocket();
+	            socket.send(packet);
+	            socket.close();
+	            
+	            System.out.println("Wake-on-LAN 패킷 전송 ");
+	            System.out.println("전송 아이피 : " + ipStr);
+	            // 프로그램 실행하면서 로딩한 아이피 보여주기
+	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
+	        }
+	        catch (Exception e) {
+	            System.out.println("패킷 전송 실패 맥주소나 아이피 주소 확인 바람 : " + e);
+	            System.exit(1);
+	        }
+	}
+	
+	private static byte[] getMacBytes(String macStr) throws IllegalArgumentException {
+		byte[] bytes = new byte[6];
+		String[] hex = macStr.split("(\\:|\\-)");
+		if (hex.length != 6) {
+			throw new IllegalArgumentException("Invalid MAC address.");
+		}
+		try {
+			for (int i = 0; i < 6; i++) {
+				bytes[i] = (byte) Integer.parseInt(hex[i], 16);
+			}
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("맥 주소가 이상하다 휴먼");
+		}
+		return bytes;
+	}
+}
 
 /*****************************************************************/
 class TurnonButton extends JButton implements ActionListener { // 버튼 액션 정의
@@ -20,21 +77,33 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 	public void actionPerformed(ActionEvent e) {
 		addActionListener(this);
 	 System.out.println("TurnOnButton 클릭됨");
-	// System.out.println("겟소스 : " + e.getSource());
+	 
+	 TurnOnLan LanAction = new TurnOnLan(); // TurnOnLan객체 생성
+		LanAction.TurnOnLan(); // WakeOnLan함수 호출
+		
+
+	 
 	}
 	
-	public void IP(String ip) {
+	public void IP(String ip) { // 객체 타입으로 받기 위해 바꿈
 		System.out.println("로딩한 아이피 : " + ip);
-	}
+	} // 리턴 나갈꺼 없음 콘솔 내부적으로 표기만 할꺼임
+	
+	
+	
 	
 }
 /*****************************************************************/
 class MouseEventClass extends Frame implements MouseListener { // 프레임 상에서 x와 y값을 알아내기 위해 생성
+	
+	 public static final int PORT = 9;  
+	 
 	public MouseEventClass() {
 		addMouseListener(this);
 		System.out.println("마우스 이벤트 클릭시 this값 : " + this);
-		
+
 	}
+    
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		System.out.println("마우스 클릭");
@@ -73,6 +142,7 @@ public class WakeOne {
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
 		JButton TurnonButton = new JButton("TurnOn");
 		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
+		TurnOnLan IP = new TurnOnLan();
 		
 		mainframe.setDefaultCloseOperation(mainframe.EXIT_ON_CLOSE);
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
@@ -83,9 +153,10 @@ public class WakeOne {
 		// TurnonButton.setLocation(40, 0);
 		System.out.println("프로그램 실행 콘솔");
 		
-		String ip_text = "192.168.0.10"; // 일단 하드코딩 된 상태로 둠
-		String mac_text = "12:3D:3E:1A:3F"; // 일단 하드코딩 된 상태로 둠
+		String ip_text = "test";
+		
 		ip_mac_view = new JTextField(ip_text); // 객체 생성 하면서 뷰 보여줌
+		 // text field 내용
 		
 		ip_mac_view.setBounds(342,53,200,30);
 		mainframe.add(ip_mac_view);
@@ -97,8 +168,10 @@ public class WakeOne {
 		 TurnonButton Turnbutton = new TurnonButton();
 		TurnonButton.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
 		
-		Turnbutton.IP(ip_text); // 프로그램 실행하면서 로딩한 아이피 보여주기
-		// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
+	/*	TurnOnLan IpLoading = new TurnOnLan();
+		Turnbutton.IP(IpLoading.TurnOnLan());*/
+		
+
 		
 		
 		
