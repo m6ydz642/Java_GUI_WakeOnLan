@@ -22,9 +22,7 @@ class TurnOnLan {
 	public void TurnOnLan() {
 		
 	     String ipStr = "192.168.0.35"; // 일단은 하드코딩 된 상태로 둠
-	
-	     
-	        String macStr = "D8-D3-85-00-5A-A9";
+	     String macStr = "D8-D3-85-00-5A-A9";
 	        
 		 try {
 	            byte[] macBytes = getMacBytes(macStr);
@@ -140,7 +138,7 @@ public class WakeOne {
 	public static void main(String[] args) {
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
-		JButton TurnonButton = new JButton("TurnOn");
+		JButton TurnonButton = new JButton("전체 부팅");
 		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
 		TurnOnLan IP = new TurnOnLan();
 		
