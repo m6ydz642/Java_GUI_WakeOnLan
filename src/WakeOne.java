@@ -177,6 +177,7 @@ public class WakeOne {
 		String[] macaddress_text = alltext.split(";");
 		System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
 		ip_mac_view = new JTextField(ip_text[0]); // 객체 생성 하면서 뷰 보여줌
+	
 		 // text field 내용
 ;
 		
@@ -191,7 +192,7 @@ public class WakeOne {
 		
 		
 		
-		ip_mac_view.setBounds(281,116,200,30); // 텍스트 필드 
+		ip_mac_view.setBounds(157,152,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
 		
 		MouseEventClass mouseevent = new MouseEventClass(); // 마우스 이벤트 객체 호출
