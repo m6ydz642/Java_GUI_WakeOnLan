@@ -27,10 +27,10 @@ class SelectBox{
 
 
 
-public Component JComboBox (Object iplist) {
+public Component JComboBox (String iplist[]) {
 	//	String country[]={"India","Aus","U.S.A","England","Newzealand"};    
-		JComboBox<Object> cb = new JComboBox();
-		cb.setBounds(433,307,200,30); // 텍스트 필드 
+		JComboBox<String> cb = new JComboBox(iplist);
+		cb.setBounds(217,93,200,30); // 텍스트 필드 
 		System.out.println("Jcombobox호출");
 		System.out.println("JComboBox 리턴값 : " + cb);
 		return cb;
@@ -139,13 +139,14 @@ public class WakeOne extends JFrame{
 	
 
 		 IpList IpButton = new IpList(); 
+		 
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 
 		 SelectBox IpSelect = new SelectBox();
-		 Object[] iplist = ip_text;
-		 mainframe.add(IpSelect.JComboBox(iplist));
+		 mainframe.add(IpSelect.JComboBox(ip_text));
 		 
+		 System.out.println("오브젝트 iplist 내용 : " + ip_text[0]);
 		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);
 
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
