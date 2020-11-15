@@ -1,6 +1,7 @@
 import java.awt.Component;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.MenuItem;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,28 +31,52 @@ import javax.swing.JTextField;
 class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖에서 JComboBox 기능 다 쓰려면 상속 받아야 함
 	// 상속안받으면 객체 만들고 JComboBox에 대한 제공 함수를 사용 못함
 
-
-	public void actionPerformed(ActionEvent e) {
+	
+	
+// 클래스에서 빼서 publci 함수형 액션 리스너로 하니까 안되서 밑에서 ComboBox 만들때 
+// 같이 익명함수? 로 호출해서 사용하는 리스너로 바꿈 
+// https://stackoverflow.com/questions/1346978/java-using-an-actionlistener-to-call-a-function-in-another-class-on-an-object-f
+	
+	
+/*	public void actionPerformed(ActionEvent e) {
 		addActionListener(this);
-		System.out.println("select Listner : " + e.getSource());
+		 System.out.println("select Listner 호출 : " + e.getActionCommand());
+		 
+		 Object o = e.getActionCommand();
+		 if (o == "comboBoxChanged"){
+			 System.out.println("콤보박스 오브젝트 실행");
+			 Content();
+		 }
+
+	}*/
+	
+	public void Content () {
+		System.out.println("Content실행 ");
 		
 	}
-	
-	// 함수 호출 형태로 안되서 일단 보류
-/*public Component JComboBox (String iplist[]) {
-	//	String country[]={"India","Aus","U.S.A","England","Newzealand"};    
-		JComboBox<String> cb = new JComboBox(iplist);
+
+
+	public JComboBox ListBox (String ip_text[]) {
+		JComboBox cb = new JComboBox(ip_text);
 		cb.setBounds(217,93,200,30); // 텍스트 필드 
 		System.out.println("Jcombobox호출");
 		System.out.println("JComboBox 리턴값 : " + cb);
-		return cb;
-	
-	}
-*/
-
-
-
-
+		cb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 System.out.println("select Listner 호출 : " + e.getActionCommand());
+				 
+				 Object o = e.getActionCommand();
+				 if (o == "comboBoxChanged"){
+					 System.out.println("콤보박스 오브젝트 실행");
+					 Content();
+				 }
+				
+			}
+		});
+		return cb; // 외부에서 객체 호출해서 쓸때 사용하려고 호출
+		}
 
 
 }
@@ -157,21 +182,14 @@ public class WakeOne extends JFrame{
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
 
-		 SelectBox IpSelect = new SelectBox();
-		 
-			JComboBox cb = new JComboBox(ip_text);
-			cb.setBounds(217,93,200,30); // 텍스트 필드 
-			System.out.println("Jcombobox호출");
-			System.out.println("JComboBox 리턴값 : " + cb);
+		 SelectBox cb = new SelectBox();
 			
-		 mainframe.add(cb); // ComboBox 메인 프레임에 추가
-		 
+		 mainframe.add(cb.ListBox(ip_text)); // ComboBox 메인 프레임에 추가
+		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
 		
-		 // IpSelect.addActionListener(IpSelect);
-		 cb.addActionListener(IpSelect);
-		 
-		 System.out.println("오브젝트 iplist 내용 : " + ip_text[0]);
-		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);
+	
+		 /*System.out.println("오브젝트 iplist 내용 : " + ip_text[0]);
+		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);*/
 
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
 			int j =0;
@@ -180,9 +198,20 @@ public class WakeOne extends JFrame{
 			System.out.println("j값[" + j + "]" + "맥 주소 : " + macaddress_text[j]);
 			
 		} 
-	
-		System.out.println("select 값 : " + IpSelect.getSelectedItem());
+		 // cb.addActionListener(cb.ListBox(ip_text)); // IpSelect클래스에서 액션 리스너 호출
+	//	cb.addActionListener(cb); // IpSelect클래스에서 액션 리스너 호출
 		
+		 // 이전에 여기서 ComboBox선언해서 쓸때
+		// JComboBox cb = new JComboBox(ip_text); 해서 cb를 리스너로 넣는거랑 같음
+		 // 함수로 호출해서 타입 그대로 사용함
+		 
+/*	if (cb.Content()) {
+		System.out.println("ipselect값 true");
+		// cb.ListBox(ip_text);
+		 System.out.println("SelectBox에서 가져온 item내용 : " + cb.ListBox(ip_text).getSelectedItem().toString());
+	}*/
+	
+	
 	}
 
 
