@@ -22,37 +22,30 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-/*class IP_MAC extends JTextComponent implements SwingConstants { // text필드 정의
-
-	
-}*/
-
 /*****************************************************************/
 class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖에서 JComboBox 기능 다 쓰려면 상속 받아야 함
 	// 상속안받으면 객체 만들고 JComboBox에 대한 제공 함수를 사용 못함
-
-	
 	
 // 클래스에서 빼서 publci 함수형 액션 리스너로 하니까 안되서 밑에서 ComboBox 만들때 
-// 같이 익명함수? 로 호출해서 사용하는 리스너로 바꿈 
+// 같이 익명함수? 호출해서 사용하는 리스너로 바꿈 
 // https://stackoverflow.com/questions/1346978/java-using-an-actionlistener-to-call-a-function-in-another-class-on-an-object-f
 	
-	
-/*	public void actionPerformed(ActionEvent e) {
-		addActionListener(this);
-		 System.out.println("select Listner 호출 : " + e.getActionCommand());
-		 
-		 Object o = e.getActionCommand();
-		 if (o == "comboBoxChanged"){
-			 System.out.println("콤보박스 오브젝트 실행");
-			 Content();
-		 }
+private String ip; // 아이피 값 전달용
 
-	}*/
-	
+	public String getIp() {
+	return ip;
+}
+
+
+public void setIp(String ip) {
+	System.out.println("set ip 넘어온 값 : " + ip.toString());
+	this.ip = ip;
+}
+
+
 	public String Content (String ip) {
 		System.out.println("ip 선택 넘어온 값 : " + ip.toString());
-		return ip; // 외부에 호출해서 어디쓰던가 할듯
+		return ip; // 외부에 호출해서 어디쓰던가 할듯, 일단은 장식임
 	}
 
 
@@ -71,9 +64,13 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 				 if (o == "comboBoxChanged"){
 					 System.out.println("콤보박스 오브젝트 실행");
 					 System.out.println("getsource : " + e.getSource().toString());
-					 Content(e.getSource().toString());
+				//	 Content(e.getSource().toString());
 				 }
-				 System.out.println("얻어온 아이피 내용 : " + Content(cb.getSelectedItem().toString())); // 리스트 박스 호출 될때마다 요청
+//				 System.out.println("얻어온 아이피 내용 : " + Content(cb.getSelectedItem().toString()));
+				 // 리스트 박스 호출 될때마다 요청
+				 setIp((cb.getSelectedItem().toString()));
+				// 다른데서 쓰려고 생각하고 있었는데 일단 함수 만들어서 값은 전달 해놈
+				 
 				
 			}
 		});
@@ -150,15 +147,15 @@ public class WakeOne extends JFrame{
 		String alltext = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
 		String[] ip_text = alltext.split(";");
-		System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
+	//	System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
 	//	공백 등 toString 자체 양식 제거 (오버라이딩으로 재정의 해서 쓰려고 했는데 안됨 ㅡ.ㅡ;;)
 	
 		String[] macaddress_text = alltext.split(";");
-		System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
+	//	System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
 		ip_mac_view = new JTextField(ip_text[0]); // 객체 생성 하면서 뷰 보여줌
 	
 		 // text field 내용
-;
+
 		
 		
 		/*
@@ -183,7 +180,7 @@ public class WakeOne extends JFrame{
 		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
 	
 
-		 IpList IpButton = new IpList(); 
+		 IpListValue IpButton = new IpListValue(); 
 		 
 		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
 		 System.out.println("iplist 내용 : " + IpButton);
@@ -200,8 +197,8 @@ public class WakeOne extends JFrame{
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
 			int j =0;
 			j = i+1; // j에다 i값 플러스
-			System.out.println("i값[" + i + "]" + "아이피 주소 : " + ip_text[i]);
-			System.out.println("j값[" + j + "]" + "맥 주소 : " + macaddress_text[j]);
+		/*	System.out.println("i값[" + i + "]" + "아이피 주소 : " + ip_text[i]);
+			System.out.println("j값[" + j + "]" + "맥 주소 : " + macaddress_text[j]);*/
 			
 		} 
 		 // cb.addActionListener(cb.ListBox(ip_text)); // IpSelect클래스에서 액션 리스너 호출
@@ -211,13 +208,6 @@ public class WakeOne extends JFrame{
 		// JComboBox cb = new JComboBox(ip_text); 해서 cb를 리스너로 넣는거랑 같음
 		 // 함수로 호출해서 타입 그대로 사용함
 		 
-/*	if (cb.Content()) {
-		System.out.println("ipselect값 true");
-		// cb.ListBox(ip_text);
-		 System.out.println("SelectBox에서 가져온 item내용 : " + cb.ListBox(ip_text).getSelectedItem().toString());
-	}*/
-		// System.out.println("SelectBox에서 가져온 item내용 : " + cb.Content(cb.ListBox(ip_text).getSelectedItem().toString()));
-	
 	}
 	
 

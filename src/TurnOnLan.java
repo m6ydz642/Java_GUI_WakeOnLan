@@ -6,8 +6,9 @@ class TurnOnLan {
 	public static final int PORT = 9;    
 	
 	public void TurnOnLan() {
+
+	      String ipStr = "192.168.0.10"; // 일단은 하드코딩 된 상태로 둠
 		
-	     String ipStr = "192.168.0.35"; // 일단은 하드코딩 된 상태로 둠
 	     String macStr = "D8-D3-85-00-5A-A9";
 	        
 		 try {
