@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.tools.JavaCompiler;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,11 +27,18 @@ import javax.swing.JTextField;
 }*/
 
 /*****************************************************************/
-class SelectBox{ 
+class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖에서 JComboBox 기능 다 쓰려면 상속 받아야 함
+	// 상속안받으면 객체 만들고 JComboBox에 대한 제공 함수를 사용 못함
 
 
-
-public Component JComboBox (String iplist[]) {
+	public void actionPerformed(ActionEvent e) {
+		addActionListener(this);
+		System.out.println("select Listner : " + e.getSource());
+		
+	}
+	
+	// 함수 호출 형태로 안되서 일단 보류
+/*public Component JComboBox (String iplist[]) {
 	//	String country[]={"India","Aus","U.S.A","England","Newzealand"};    
 		JComboBox<String> cb = new JComboBox(iplist);
 		cb.setBounds(217,93,200,30); // 텍스트 필드 
@@ -36,6 +47,9 @@ public Component JComboBox (String iplist[]) {
 		return cb;
 	
 	}
+*/
+
+
 
 
 
@@ -59,7 +73,7 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		addActionListener(this);
-	 System.out.println("TurnOnButton 클릭됨");
+	 System.out.println("TurnOnButton 클릭됨 ->  " + e.getActionCommand());
 	 
 	 TurnOnLan LanAction = new TurnOnLan(); // TurnOnLan객체 생성
 		LanAction.TurnOnLan(); // WakeOnLan함수 호출
@@ -144,7 +158,17 @@ public class WakeOne extends JFrame{
 		 System.out.println("iplist 내용 : " + IpButton);
 
 		 SelectBox IpSelect = new SelectBox();
-		 mainframe.add(IpSelect.JComboBox(ip_text));
+		 
+			JComboBox cb = new JComboBox(ip_text);
+			cb.setBounds(217,93,200,30); // 텍스트 필드 
+			System.out.println("Jcombobox호출");
+			System.out.println("JComboBox 리턴값 : " + cb);
+			
+		 mainframe.add(cb); // ComboBox 메인 프레임에 추가
+		 
+		
+		 // IpSelect.addActionListener(IpSelect);
+		 cb.addActionListener(IpSelect);
 		 
 		 System.out.println("오브젝트 iplist 내용 : " + ip_text[0]);
 		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);
@@ -157,6 +181,8 @@ public class WakeOne extends JFrame{
 			
 		} 
 	
+		System.out.println("select 값 : " + IpSelect.getSelectedItem());
+		
 	}
 
 
