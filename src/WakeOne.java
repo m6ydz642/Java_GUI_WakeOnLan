@@ -50,9 +50,9 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 
 	}*/
 	
-	public void Content () {
-		System.out.println("Content실행 ");
-		
+	public String Content (String ip) {
+		System.out.println("ip 선택 넘어온 값 : " + ip.toString());
+		return ip; // 외부에 호출해서 어디쓰던가 할듯
 	}
 
 
@@ -70,13 +70,19 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 				 Object o = e.getActionCommand();
 				 if (o == "comboBoxChanged"){
 					 System.out.println("콤보박스 오브젝트 실행");
-					 Content();
+					 System.out.println("getsource : " + e.getSource().toString());
+					 Content(e.getSource().toString());
 				 }
+				 System.out.println("얻어온 아이피 내용 : " + Content(cb.getSelectedItem().toString())); // 리스트 박스 호출 될때마다 요청
 				
 			}
 		});
+		
+	
+		
+	
 		return cb; // 외부에서 객체 호출해서 쓸때 사용하려고 호출
-		}
+}
 
 
 }
@@ -210,9 +216,10 @@ public class WakeOne extends JFrame{
 		// cb.ListBox(ip_text);
 		 System.out.println("SelectBox에서 가져온 item내용 : " + cb.ListBox(ip_text).getSelectedItem().toString());
 	}*/
-	
+		// System.out.println("SelectBox에서 가져온 item내용 : " + cb.Content(cb.ListBox(ip_text).getSelectedItem().toString()));
 	
 	}
+	
 
 
 
