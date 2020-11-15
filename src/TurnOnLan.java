@@ -5,11 +5,13 @@ import java.net.InetAddress;
 class TurnOnLan {
 	public static final int PORT = 9;    
 	
-	public void TurnOnLan() {
 
-	      String ipStr = "192.168.0.10"; // 일단은 하드코딩 된 상태로 둠
+	public void TurnOnLan() {
+		GetSet_IP_Mac iplist = new GetSet_IP_Mac();
 		
-	     String macStr = "D8-D3-85-00-5A-A9";
+	      String ipStr = iplist.getIp(); 
+	
+	     String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
 	            byte[] macBytes = getMacBytes(macStr);

@@ -6,6 +6,7 @@ import java.awt.MenuItem;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.synth.SynthSplitPaneUI;
 import javax.tools.JavaCompiler;
 
 import java.awt.event.ActionEvent;
@@ -30,19 +31,6 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 // 같이 익명함수? 호출해서 사용하는 리스너로 바꿈 
 // https://stackoverflow.com/questions/1346978/java-using-an-actionlistener-to-call-a-function-in-another-class-on-an-object-f
 	
-private String ip; // 아이피 값 전달용
-
-	public String getIp() {
-	return ip;
-}
-
-
-public void setIp(String ip) {
-	System.out.println("set ip 넘어온 값 : " + ip.toString());
-	this.ip = ip;
-}
-
-
 	public String Content (String ip) {
 		System.out.println("ip 선택 넘어온 값 : " + ip.toString());
 		return ip; // 외부에 호출해서 어디쓰던가 할듯, 일단은 장식임
@@ -67,9 +55,10 @@ public void setIp(String ip) {
 				//	 Content(e.getSource().toString());
 				 }
 //				 System.out.println("얻어온 아이피 내용 : " + Content(cb.getSelectedItem().toString()));
-				 // 리스트 박스 호출 될때마다 요청
-				 setIp((cb.getSelectedItem().toString()));
-				// 다른데서 쓰려고 생각하고 있었는데 일단 함수 만들어서 값은 전달 해놈
+				GetSet_IP_Mac ip = new GetSet_IP_Mac();
+				ip.setIp((cb.getSelectedItem().toString()));	 // 리스트 박스 호출 될때마다 요청
+			
+				// Select 박스 선택시 setIp함수에 아이피를 등록 해놈
 				 
 				
 			}
@@ -84,7 +73,7 @@ public void setIp(String ip) {
 
 }
 /*****************************************************************/
-class IpList extends JButton{ 
+class IpListValue extends JButton{ 
 	public Component IpList() {
 		JButton Start = new JButton("부분 부팅 준비");
 		Start.setBounds(626,117,200,30); // 텍스트 필드 
@@ -102,11 +91,13 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 	public void actionPerformed(ActionEvent e) {
 		addActionListener(this);
 	 System.out.println("TurnOnButton 클릭됨 ->  " + e.getActionCommand());
-	 
+		GetSet_IP_Mac cb = new GetSet_IP_Mac() ;
+		System.out.println("부팅 버튼 호출 getter ip값 : " + cb.getIp());
+		
 	 TurnOnLan LanAction = new TurnOnLan(); // TurnOnLan객체 생성
 		LanAction.TurnOnLan(); // WakeOnLan함수 호출
 		
-
+	
 	 
 	}
 	
