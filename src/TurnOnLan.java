@@ -1,6 +1,8 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 class TurnOnLan {
 	public static final int PORT = 9;    
@@ -9,12 +11,22 @@ class TurnOnLan {
 	public void TurnOnLan() {
 		GetSet_IP_Mac iplist = new GetSet_IP_Mac();
 		
-	      String ipStr = iplist.getIp(); 
+		List<String> SplitIpList = new ArrayList<String> ();
+		SplitIpList.add(iplist.getIp() ); // 아이피주소에 맥주소가 같이 있어서 그 다음 배열이 무조건 맥주소임
+	    System.out.println("가져온 TurnOnLan 내용 " + SplitIpList.toString() );
+	    
+	    String[] test = SplitIpList.toString().split(" "); // 테스트
+	     String[] ipStr = iplist.getIp().split(" "); 
+	     String[] macStr = iplist.getMac().split(" "); 
 	
-	     String macStr = "D8:D3:85:00:5A:A9";
+	    // String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
-	            byte[] macBytes = getMacBytes(macStr);
+			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
+			 // 별도로 몇번째 아이피인지 다시 안세도 됨
+			 System.out.println("나눈 맥주소 " + macStr[1]);
+			 System.out.println("나눈 아이피 : " + ipStr[0]);
+	            byte[] macBytes = getMacBytes(macStr[1]);
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
 	            for (int i = 0; i < 6; i++) {
 	                bytes[i] = (byte) 0xff;
@@ -23,14 +35,14 @@ class TurnOnLan {
 	                System.arraycopy(macBytes, 0, bytes, i, macBytes.length);
 	            }
 	            
-	            InetAddress address = InetAddress.getByName(ipStr);
+	            InetAddress address = InetAddress.getByName(ipStr[0]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
 	            DatagramSocket socket = new DatagramSocket();
 	            socket.send(packet);
 	            socket.close();
 	            
 	            System.out.println("Wake-on-LAN 패킷 전송 ");
-	            System.out.println("전송 아이피 : " + ipStr);
+	            System.out.println("전송 아이피 : " + ipStr[0]);
 	            // 프로그램 실행하면서 로딩한 아이피 보여주기
 	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
 	        }

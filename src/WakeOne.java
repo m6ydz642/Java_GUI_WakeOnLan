@@ -45,10 +45,18 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 		
 		
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
+			/*
+			 * ip_text[0]는 아이피 
+			 * macaddress_text[1]에는 맥주소 들어있음
+			 * 
+			 * 어쩌다 보니 0 2 4 6 8등 짝수 형태는 아이피
+			 * 홀수 형태는 무조건 mac주소가 됨
+			 * */
+			
 			int j =0, count = 0;
 			j = i+1; // j에다 i값 플러스
 			plusIP_mac = ip_text[i] + mac_text[j];
-			ip_mac.add(plusIP_mac);
+			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
 		} 
 	
 		JComboBox cb = new JComboBox(ip_mac.toArray()); // 배열타입으로만 받아서 toArray로 넣음
@@ -72,10 +80,9 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 				GetSet_IP_Mac ip = new GetSet_IP_Mac();
 				ip.setIp((cb.getSelectedItem().toString()));	 // 리스트 박스 호출 될때마다 요청
 				// Select 박스 선택시 setIp함수에 아이피를 등록 해놈
-				ip.setMac((cb.getSelectedItem().toString()));
-				
-				 
-				
+				ip.setMac((cb.getSelectedItem().toString())); // 사실 setIp에 이미 맥주소도 선택한것도 같이 들어가있어서
+															// 맥주소에 대한 setter, getter는 필요없음
+	
 			}
 		});
 		
@@ -90,11 +97,9 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 /*****************************************************************/
 class IpListValue extends JButton{ 
 	public Component IpList() {
-		JButton Start = new JButton("부분 부팅 준비");
+		JButton Start = new JButton("부분 부팅 준비"); // 요놈을 어떻게 할까.......
 		Start.setBounds(626,117,200,30); // 텍스트 필드 
 		return Start;
-	
-
 	}
 }
 
@@ -162,17 +167,6 @@ public class WakeOne extends JFrame{
 	
 		 // text field 내용
 
-	
-		
-		/*
-		 * ip_text[0]는 아이피 
-		 * macaddress_text[1]에는 맥주소 들어있음
-		 * 
-		 * 어쩌다 보니 0 2 4 6 8등 짝수 형태는 아이피
-		 * 홀수 형태는 mac주소가 됨
-		 * */
-		
-		
 		
 		ip_mac_view.setBounds(157,152,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
@@ -195,25 +189,7 @@ public class WakeOne extends JFrame{
 			
 		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
-		
-	
-		 /*System.out.println("오브젝트 iplist 내용 : " + ip_text[0]);
-		 System.out.println("아이피 요소 갯수 길이 : " + ip_text.length);*/
-
-		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
-			int j =0;
-			j = i+1; // j에다 i값 플러스
-		/*	System.out.println("i값[" + i + "]" + "아이피 주소 : " + ip_text[i]);
-			System.out.println("j값[" + j + "]" + "맥 주소 : " + macaddress_text[j]);*/
-			
-		} 
-		 // cb.addActionListener(cb.ListBox(ip_text)); // IpSelect클래스에서 액션 리스너 호출
-	//	cb.addActionListener(cb); // IpSelect클래스에서 액션 리스너 호출
-		
-		 // 이전에 여기서 ComboBox선언해서 쓸때
-		// JComboBox cb = new JComboBox(ip_text); 해서 cb를 리스너로 넣는거랑 같음
-		 // 함수로 호출해서 타입 그대로 사용함
-		 
+	 
 	}
 	
 
