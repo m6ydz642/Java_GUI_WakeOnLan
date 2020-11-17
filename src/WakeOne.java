@@ -37,8 +37,22 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 	}
 
 
-	public JComboBox ListBox (String ip_text[]) {
-		JComboBox cb = new JComboBox(ip_text);
+	public JComboBox ListBox (String[] ip_text, String mac_text[]) {
+		
+		String plusIP_mac = null;
+		List <String> ip_mac = new ArrayList<String>(); 
+		// 받아온걸 다시 리스트로 넣음 ㅡ.ㅡ 저 JComboBox가스트링 인자 2개가 지원안함
+		
+		
+		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
+			int j =0, count = 0;
+			j = i+1; // j에다 i값 플러스
+			plusIP_mac = ip_text[i] + mac_text[j];
+			ip_mac.add(plusIP_mac);
+		} 
+	
+		JComboBox cb = new JComboBox(ip_mac.toArray()); // 배열타입으로만 받아서 toArray로 넣음
+	
 		cb.setBounds(217,93,200,30); // 텍스트 필드 
 		System.out.println("Jcombobox호출");
 		System.out.println("JComboBox 리턴값 : " + cb);
@@ -57,8 +71,9 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 //				 System.out.println("얻어온 아이피 내용 : " + Content(cb.getSelectedItem().toString()));
 				GetSet_IP_Mac ip = new GetSet_IP_Mac();
 				ip.setIp((cb.getSelectedItem().toString()));	 // 리스트 박스 호출 될때마다 요청
-			
 				// Select 박스 선택시 setIp함수에 아이피를 등록 해놈
+				ip.setMac((cb.getSelectedItem().toString()));
+				
 				 
 				
 			}
@@ -147,7 +162,7 @@ public class WakeOne extends JFrame{
 	
 		 // text field 내용
 
-		
+	
 		
 		/*
 		 * ip_text[0]는 아이피 
@@ -178,7 +193,7 @@ public class WakeOne extends JFrame{
 
 		 SelectBox cb = new SelectBox();
 			
-		 mainframe.add(cb.ListBox(ip_text)); // ComboBox 메인 프레임에 추가
+		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
 		
 	

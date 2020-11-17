@@ -27,7 +27,7 @@ class TextLoading{
 			while ((fileread = filereader.read()) != -1) { // filereader.read() 다 읽으면 반환값이 -1이라 -1 까지 
 				// filereader.read()결과값이 int타입이라 int변수 만들어서 대입
 				// fileread값에 넣으면서 while문 실행
-				System.out.print((char)fileread); // 강제 형변환
+			//	System.out.print((char)fileread); // 강제 형변환
 
 				 contentList = Character.toString((char)fileread); // char 타입을 String으로 형변환
 				
