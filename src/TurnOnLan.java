@@ -24,8 +24,9 @@ class TurnOnLan {
 		 try {
 			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
 			 // 별도로 몇번째 아이피인지 다시 안세도 됨
-			 System.out.println("나눈 맥주소 " + macStr[1]);
 			 System.out.println("나눈 아이피 : " + ipStr[0]);
+			 System.out.println("나눈 맥주소 " + macStr[1]);
+			
 	            byte[] macBytes = getMacBytes(macStr[1]);
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
 	            for (int i = 0; i < 6; i++) {
