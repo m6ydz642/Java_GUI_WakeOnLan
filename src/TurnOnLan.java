@@ -13,7 +13,6 @@ class TurnOnLan {
 		
 		List<String> SplitIpList = new ArrayList<String> ();
 		SplitIpList.add(iplist.getIp() ); // 아이피주소에 맥주소가 같이 있어서 그 다음 배열이 무조건 맥주소임
-	    System.out.println("가져온 TurnOnLan 내용 " + SplitIpList.toString() );
 	    
 	    String[] test = SplitIpList.toString().split(" "); // 테스트
 	     String[] ipStr = iplist.getIp().split(" "); 
@@ -44,6 +43,7 @@ class TurnOnLan {
 	            
 	            System.out.println("Wake-on-LAN 패킷 전송 ");
 	            System.out.println("전송 아이피 : " + ipStr[0]);
+	            System.out.println("전송 맥주소 " + macStr[1]);
 	            // 프로그램 실행하면서 로딩한 아이피 보여주기
 	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
 	        }

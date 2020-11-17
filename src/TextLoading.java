@@ -16,7 +16,7 @@ class TextLoading{
 		 String contentList = "";
 		try {
 	
-			File file = new File("test.txt"); // 파일 객체 생성
+			File file = new File("ip.txt"); // 파일 객체 생성
 			String path = file.getAbsolutePath(); // 파일경로 읽어 오기
 			System.out.println("path 경로 : " + path);
 			FileReader filereader = new FileReader(path); // 입력 스트림 생성하면서 파일 경로를 가져옴
