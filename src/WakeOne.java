@@ -1,26 +1,11 @@
 import java.awt.Component;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.MenuItem;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.synth.SynthSplitPaneUI;
-import javax.tools.JavaCompiler;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.AbstractButton;
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /*****************************************************************/
