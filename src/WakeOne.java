@@ -1,5 +1,12 @@
 import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.MenuBar;
+
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +15,25 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+class MyMenu extends JMenu{
+	public MyMenu() {
+	
+	}
+	JMenu main = new JMenu("메뉴");
+	JMenuItem m1 = new JMenuItem("메뉴1번");
+	JMenuBar bar = new JMenuBar();
+	
+
+	public JMenu Menu (){
+		main.add(m1);
+		bar.add(main); // 메뉴바에 Menu넣음
+		
+	//	main.setVisible(true);
+		System.out.println("main값 : " + main);
+		return main;
+	}
+	
+}
 /*****************************************************************/
 class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖에서 JComboBox 기능 다 쓰려면 상속 받아야 함
 	// 상속안받으면 객체 만들고 JComboBox에 대한 제공 함수를 사용 못함
@@ -50,6 +76,8 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 		cb.setBounds(223,63,200,30); // 텍스트 필드 
 		System.out.println("Jcombobox호출");
 		System.out.println("JComboBox 리턴값 : " + cb);
+		
+
 		cb.setSelectedIndex(-1); // 초기 선택값
 		
 		cb.addActionListener(new ActionListener() {
@@ -181,6 +209,20 @@ public class WakeOne extends JFrame{
 		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
 	 
+		 MyMenu M = new MyMenu();
+		 M.add(M.Menu());
+				
+	/*	 EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				 mainframe.add(M.Menu());
+				new MyMenu().setVisible(true);
+				
+			}
+		});
+		*/
+		 
 	}
 	
 
