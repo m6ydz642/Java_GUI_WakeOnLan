@@ -142,7 +142,8 @@ public class WakeOne extends JFrame{
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
 		JButton TurnonAll = new JButton("부팅");
-		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
+		JTextField IpInPut; // 아이피 입력할 텍스트 창
+		JTextField MacInPut; // 맥주소 입력할 텍스트 창
 		TurnOnLan IP = new TurnOnLan();
 		
 		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
@@ -166,13 +167,15 @@ public class WakeOne extends JFrame{
 	
 		String[] macaddress_text = alltext.split(";");
 	//	System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
-		ip_mac_view = new JTextField(ip_text[0]); // 객체 생성 하면서 뷰 보여줌
-	
-		 // text field 내용
-
+		IpInPut = new JTextField("저장할 아이피를 입력하세요"); // 객체 생성 하면서 뷰 보여줌
+		// text field 내용
+		MacInPut = new JTextField("저장할 맥 주소를 입력하세요");
 		
-		ip_mac_view.setBounds(221,192,200,30); // 텍스트 필드 
-		mainframe.add(ip_mac_view);
+		IpInPut.setBounds(221,192,200,30); // 아이피 입력창 텍스트 필드 위치 
+		MacInPut.setBounds(228, 262, 200, 30); // 맥주소 입력창 텍스트 필드 위치 
+		mainframe.add(IpInPut); // 아이피 입력창 메인프레임에 추가
+		mainframe.add(MacInPut); // 맥 입력창 메인 프레임에 추가
+		
 		
 		MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
 		// 좌표 설정 할때 사용하려고 만듦
