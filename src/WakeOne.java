@@ -53,17 +53,20 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 			 * 홀수 형태는 무조건 mac주소가 됨
 			 * */
 			
-			int j =0, count = 0;
+			int j =0, count = 0, sum =0 ;
 			j = i+1; // j에다 i값 플러스
 			plusIP_mac = ip_text[i] + mac_text[j];
 			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
+			
 		} 
-	
+
 		JComboBox cb = new JComboBox(ip_mac.toArray()); // 배열타입으로만 받아서 toArray로 넣음
 	
-		cb.setBounds(217,93,200,30); // 텍스트 필드 
+		cb.setBounds(223,63,200,30); // 텍스트 필드 
 		System.out.println("Jcombobox호출");
 		System.out.println("JComboBox 리턴값 : " + cb);
+		cb.setSelectedIndex(-1); // 초기 선택값
+		
 		cb.addActionListener(new ActionListener() {
 			
 			@Override
@@ -97,8 +100,8 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 /*****************************************************************/
 class IpListValue extends JButton{ 
 	public Component IpList() {
-		JButton Start = new JButton("부분 부팅 준비"); // 요놈을 어떻게 할까.......
-		Start.setBounds(626,117,200,30); // 텍스트 필드 
+		JButton Start = new JButton("전체 부팅 하기"); // 요놈을 어떻게 할까.......
+		Start.setBounds(627,66,200,30); // 텍스트 필드 
 		return Start;
 	}
 }
@@ -138,7 +141,7 @@ public class WakeOne extends JFrame{
 	public static void main(String[] args) {
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
-		JButton TurnonAll = new JButton("전체 부팅");
+		JButton TurnonAll = new JButton("부팅");
 		JTextField ip_mac_view; // ip, mac주소 보여주는 텍스트 창
 		TurnOnLan IP = new TurnOnLan();
 		
@@ -168,7 +171,7 @@ public class WakeOne extends JFrame{
 		 // text field 내용
 
 		
-		ip_mac_view.setBounds(157,152,200,30); // 텍스트 필드 
+		ip_mac_view.setBounds(221,192,200,30); // 텍스트 필드 
 		mainframe.add(ip_mac_view);
 		
 		MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
