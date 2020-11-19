@@ -3,7 +3,7 @@
 자바로 만들고 있는 WakeOnLan GUI 입니다
 
 
-![WakeOnLanDesign](https://user-images.githubusercontent.com/45617447/99643243-cba1ca80-2a8f-11eb-8379-c487116aeb8a.jpg)
+![WakeOnLanDesign](https://user-images.githubusercontent.com/45617447/99643243-cba1ca80-2a8f-11eb-8379-c487116aeb8a.jpg) <br>
 <11월 19일>
 <br>
 <br>
