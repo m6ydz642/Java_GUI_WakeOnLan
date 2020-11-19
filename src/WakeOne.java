@@ -41,7 +41,17 @@ class MenuTest  // 창한개 더 만들어서 쓸까 생각중
 		f.setVisible(true);
 }  
 }*/
-          
+class InformationAction implements ActionListener {
+	public InformationAction() { // 기본 생성자로 호출
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("정보추가 버튼액션 호출 ");
+	}
+	
+}
 class MyMenu extends JMenu{
 
 	JMenu menu = new JMenu("메뉴");
@@ -62,19 +72,7 @@ class MyMenu extends JMenu{
 			}
 		});
 	}
-	
-/*	public JMenu Menu (){
-		menu = new JMenu("메인 메뉴");
-		m1 = new JMenuItem("메뉴1번");
 
-		menu.add(m1);
-	//	bar.add(main); // 메뉴바에 Menu넣음
-		System.out.println("menu값 : " + menu);
-		System.out.println("main메뉴 값 : " + m1);
-		return menu;
-	}*/
-
-	
 	
 }
 /*****************************************************************/
@@ -192,14 +190,21 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 
 public class WakeOne extends JFrame{
 
-	
+
 	public static void main(String[] args) {
-		
+		/*********************************************************************/
+		// 메인 프레임에 붙는 정보들
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
 		JButton TurnonAll = new JButton("부팅");
 		JTextField IpInPut; // 아이피 입력할 텍스트 창
 		JTextField MacInPut; // 맥주소 입력할 텍스트 창
-		TurnOnLan IP = new TurnOnLan();
+		// TurnOnLan IP = new TurnOnLan();
+		JButton AddInformation = new JButton("정보추가 하기"); // 그냥 main안에서 하는걸로
+		/*********************************************************************/
+		AddInformation.setBounds(474,227,120,30); // 정보추가 버튼 사이즈 & 위치
+		
+		InformationAction InformationButtonAction = new InformationAction(); // 정보추가 클래스
+		AddInformation.addActionListener(InformationButtonAction); // 리스너 추가
 		
 		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
 		 List<String> contentlist = new ArrayList<String>();
@@ -207,11 +212,13 @@ public class WakeOne extends JFrame{
 		 
 		mainframe.setDefaultCloseOperation(mainframe.EXIT_ON_CLOSE);
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
-		mainframe.setSize(1000, 500); // 프레임 사이즈 
-		mainframe.setLayout(null);
+		mainframe.setSize(800, 400); // 메인 프레임 사이즈 
+		mainframe.setLayout(null); 
 		TurnonAll.setBounds(47,57,95,30); // x, y, height,width 
+		/*********************************************************************/
 		mainframe.add(TurnonAll); // 메인 프레임에 버튼 추가해서 넣기
-
+		mainframe.add(AddInformation); // 아이피 & 맥주소 추가 버튼 
+		/*********************************************************************/
 		System.out.println("프로그램 실행 콘솔");
 		
 		String alltext = contentlist.toString().replaceAll("^\\[", "")
