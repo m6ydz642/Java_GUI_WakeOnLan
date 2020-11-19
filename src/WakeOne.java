@@ -1,6 +1,4 @@
 import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.MenuBar;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -44,16 +42,25 @@ class MenuTest  // 창한개 더 만들어서 쓸까 생각중
 }  
 }*/
           
-class MyMenu extends JMenu implements ActionListener{
+class MyMenu extends JMenu{
 
 	JMenu menu = new JMenu("메뉴");
-	JMenuItem m1 = new JMenuItem("Item");
+	JMenuItem m1 = new JMenuItem("기타");
 	JMenuBar mb = new JMenuBar();
 
 	public MyMenu() { // 기본생성자로 실행시 초기값 넣어놈
 		System.out.println("메뉴 호출 성공");
 		menu.add(m1);
 		mb.add(menu);
+		
+		m1.addActionListener(new ActionListener() { // 익명함수로 호출함
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			System.out.println("메뉴 호출 내용 : " + e.getActionCommand());
+				
+			}
+		});
 	}
 	
 /*	public JMenu Menu (){
@@ -67,12 +74,7 @@ class MyMenu extends JMenu implements ActionListener{
 		return menu;
 	}*/
 
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("메뉴 액션 호출");
-		
-	}
+	
 	
 }
 /*****************************************************************/
@@ -154,8 +156,8 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 /*****************************************************************/
 class IpListValue extends JButton{ 
 	public Component IpList() {
-		JButton Start = new JButton("전체 부팅 하기"); // 요놈을 어떻게 할까.......
-		Start.setBounds(627,66,200,30); // 텍스트 필드 
+		JButton Start = new JButton("전체부팅 하기"); // 요놈을 어떻게 할까.......
+		Start.setBounds(469,64,200,30); // 텍스트 필드 
 		return Start;
 	}
 }
@@ -251,9 +253,11 @@ public class WakeOne extends JFrame{
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
 	 
 		 MyMenu MainMenu = new MyMenu();
-		 mainframe.add(MainMenu);
+		 mainframe.add(MainMenu); // 메인 프레임에 메인 메뉴 추가
 		 mainframe.setJMenuBar(MainMenu.mb); // 이시끼 없어서 계속 뻘짓함 ㅡ.ㅡ ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 		 						// MainMenu -> mb 멤버 변수에서 가져옴
+		 						// 메인 프레임에 메뉴바 추가
+
 		 
 		
 		 
