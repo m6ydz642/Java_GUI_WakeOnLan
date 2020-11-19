@@ -14,23 +14,64 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+/*
+class MenuTest  // 창한개 더 만들어서 쓸까 생각중
+{  
+	JMenu menu, submenu;
+	JMenuItem i1, i2, i3, i4, i5;
 
-class MyMenu extends JMenu{
-	public MyMenu() {
-	
+	MenuTest() {
+		JFrame f = new JFrame("메뉴, 메뉴 별도로 띄우기");
+		JMenuBar mb = new JMenuBar();
+		menu = new JMenu("Menu");
+		submenu = new JMenu("Sub Menu");
+		i1 = new JMenuItem("Item 1");
+		i2 = new JMenuItem("Item 2");
+		i3 = new JMenuItem("Item 3");
+		i4 = new JMenuItem("Item 4");
+		i5 = new JMenuItem("Item 5");
+		menu.add(i1);
+		menu.add(i2);
+		menu.add(i3);
+		submenu.add(i4);
+		submenu.add(i5);
+		menu.add(submenu);
+		mb.add(menu);
+		f.setJMenuBar(mb);
+		f.setSize(400, 400);
+		f.setLayout(null);
+		f.setVisible(true);
+}  
+}*/
+          
+class MyMenu extends JMenu implements ActionListener{
+
+	JMenu menu = new JMenu("메뉴");
+	JMenuItem m1 = new JMenuItem("Item");
+	JMenuBar mb = new JMenuBar();
+
+	public MyMenu() { // 기본생성자로 실행시 초기값 넣어놈
+		System.out.println("메뉴 호출 성공");
+		menu.add(m1);
+		mb.add(menu);
 	}
-	JMenu main = new JMenu("메뉴");
-	JMenuItem m1 = new JMenuItem("메뉴1번");
-	JMenuBar bar = new JMenuBar();
 	
+/*	public JMenu Menu (){
+		menu = new JMenu("메인 메뉴");
+		m1 = new JMenuItem("메뉴1번");
 
-	public JMenu Menu (){
-		main.add(m1);
-		bar.add(main); // 메뉴바에 Menu넣음
+		menu.add(m1);
+	//	bar.add(main); // 메뉴바에 Menu넣음
+		System.out.println("menu값 : " + menu);
+		System.out.println("main메뉴 값 : " + m1);
+		return menu;
+	}*/
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("메뉴 액션 호출");
 		
-	//	main.setVisible(true);
-		System.out.println("main값 : " + main);
-		return main;
 	}
 	
 }
@@ -38,7 +79,7 @@ class MyMenu extends JMenu{
 class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖에서 JComboBox 기능 다 쓰려면 상속 받아야 함
 	// 상속안받으면 객체 만들고 JComboBox에 대한 제공 함수를 사용 못함
 	
-// 클래스에서 빼서 publci 함수형 액션 리스너로 하니까 안되서 밑에서 ComboBox 만들때 
+// 클래스에서 빼서 public 함수형 액션 리스너로 하니까 안되서 밑에서 ComboBox 만들때 
 // 같이 익명함수? 호출해서 사용하는 리스너로 바꿈 
 // https://stackoverflow.com/questions/1346978/java-using-an-actionlistener-to-call-a-function-in-another-class-on-an-object-f
 	
@@ -150,7 +191,6 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 public class WakeOne extends JFrame{
 
 	
-	
 	public static void main(String[] args) {
 		
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
@@ -206,22 +246,16 @@ public class WakeOne extends JFrame{
 
 		 SelectBox cb = new SelectBox();
 			
+		 
 		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
 	 
-		 MyMenu M = new MyMenu();
-		 M.add(M.Menu());
-				
-	/*	 EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				 mainframe.add(M.Menu());
-				new MyMenu().setVisible(true);
-				
-			}
-		});
-		*/
+		 MyMenu MainMenu = new MyMenu();
+		 mainframe.add(MainMenu);
+		 mainframe.setJMenuBar(MainMenu.mb); // 이시끼 없어서 계속 뻘짓함 ㅡ.ㅡ ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+		 						// MainMenu -> mb 멤버 변수에서 가져옴
+		 
+		
 		 
 	}
 	
