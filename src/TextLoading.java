@@ -19,7 +19,8 @@ public void FileWrite(){ // 파일등록
 	try {
 		
 		
-		FileWriter fw = new FileWriter(path, true); // boolean타입 true로 하면 파일이 append된다고 명시 되어있음
+		FileWriter fw = new FileWriter(path, true); // boolean타입 true로 하면 파일이 
+		// 기존파일 + append된다고 명시 되어있음
 		BufferedWriter bw = new BufferedWriter(fw); 
 		
 		bw.newLine();

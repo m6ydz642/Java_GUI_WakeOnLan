@@ -4,23 +4,28 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 class TurnOnLan {
 	public static final int PORT = 9;    
+	static JOptionPane ErrorMessage = new JOptionPane(); // 에러메시지 객체 호출
 	
-
 	public void TurnOnLan() {
 		GetSet_IP_Mac iplist = new GetSet_IP_Mac();
 		
+		  
 		List<String> SplitIpList = new ArrayList<String> ();
 		SplitIpList.add(iplist.getIp() ); // 아이피주소에 맥주소가 같이 있어서 그 다음 배열이 무조건 맥주소임
 	    
 	    String[] test = SplitIpList.toString().split(" "); // 테스트
-	     String[] ipStr = iplist.getIp().split(" "); 
-	     String[] macStr = iplist.getMac().split(" "); 
+
 	
 	    // String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
+		     String[] ipStr = iplist.getIp().split(" "); // try문 밖에서 널페인터 오류시 
+		     //예외 처리 안되서 try문 안으로 넣음
+		     String[] macStr = iplist.getMac().split(" "); 
 			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
 			 // 별도로 몇번째 아이피인지 다시 안세도 됨
 			 System.out.println("나눈 아이피 : " + ipStr[0]);
@@ -50,6 +55,8 @@ class TurnOnLan {
 	        catch (Exception e) {
 	            System.out.println("패킷 전송 실패 맥주소나 아이피 주소 확인 바람 : " + e);
 	          // System.exit(1); // 강제 종료말고 alert창 띄울 수 있으면 alert로 할 예정
+	          
+	            ErrorMessage.showMessageDialog(null, "패킷 전송 실패 맥주소나 아이피 주소 확인 바람");
 	        }
 	}
 	
@@ -65,6 +72,10 @@ class TurnOnLan {
 			}
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("맥 주소가 이상하다 휴먼");
+			
+		}catch (Exception e) {
+			System.out.println("예외 발생 " + e);
+			 ErrorMessage.showMessageDialog(null, "맥 주소가 이상하다 휴먼");
 		}
 		return bytes;
 	}
