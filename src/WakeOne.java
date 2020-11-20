@@ -41,14 +41,39 @@ class MenuTest  // 창한개 더 만들어서 쓸까 생각중
 		f.setVisible(true);
 }  
 }*/
+class Ip_Mac_InPut{
+	private static String ip;
+	private static String mac;
+	
+	public static String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public static String getMac() {
+		return mac;
+	}
+	public  void setMac(String mac) {
+		this.mac = mac;
+	}
+	
+	
+	
+}
 class InformationAction implements ActionListener {
+	
 	public InformationAction() { // 기본 생성자로 호출
 		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("정보추가 버튼액션 호출 ");
+	public void actionPerformed(ActionEvent e) { // 그냥 main에서 익명 함수로 쓰기로 함, 이거 사실 필요없음
+
+	System.out.println("getIp로 받아온 아이피 : " + Ip_Mac_InPut.getIp());
+	System.out.println("getMac로 받아온 아이피 : " + Ip_Mac_InPut.getMac());
+	System.out.println("정보추가 버튼 이벤트 호출");
+
 	}
 	
 }
@@ -67,6 +92,7 @@ class MyMenu extends JMenu{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 			System.out.println("메뉴 호출 내용 : " + e.getActionCommand());
 				
 			}
@@ -201,10 +227,8 @@ public class WakeOne extends JFrame{
 		// TurnOnLan IP = new TurnOnLan();
 		JButton AddInformation = new JButton("정보추가 하기"); // 그냥 main안에서 하는걸로
 		/*********************************************************************/
-		AddInformation.setBounds(474,227,120,30); // 정보추가 버튼 사이즈 & 위치
-		
-		InformationAction InformationButtonAction = new InformationAction(); // 정보추가 클래스
-		AddInformation.addActionListener(InformationButtonAction); // 리스너 추가
+	
+	
 		
 		 TextLoading fileread = new TextLoading(); // 텍스트 가져오는 파일 별도로 만듦
 		 List<String> contentlist = new ArrayList<String>();
@@ -233,8 +257,30 @@ public class WakeOne extends JFrame{
 		// text field 내용
 		MacInPut = new JTextField("저장할 맥 주소를 입력하세요");
 		
+		AddInformation.setBounds(474,227,120,30); // 정보추가 버튼 사이즈 & 위치
+		
+		InformationAction InformationButtonAction = new InformationAction(); // 정보추가 클래스
+
+		AddInformation.addActionListener(InformationButtonAction); // 리스너 추가
+
+		AddInformation.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) { // 익명함수 호출, 값 받아오기
+				Ip_Mac_InPut value = new Ip_Mac_InPut();
+				value.setIp(IpInPut.getText());
+				value.setMac(IpInPut.getText());
+				
+				System.out.println("IpInPut 입력받은 값 : " + IpInPut.getText());
+				System.out.println("MacInPut 입력받은 값 : " + MacInPut.getText());
+				
+			}
+		});
+		
 		IpInPut.setBounds(221,192,200,30); // 아이피 입력창 텍스트 필드 위치 
-		MacInPut.setBounds(228, 262, 200, 30); // 맥주소 입력창 텍스트 필드 위치 
+		MacInPut.setBounds(228, 262, 200, 30); // 맥주소 입력창 텍스트 필드 위치
+
+		
 		mainframe.add(IpInPut); // 아이피 입력창 메인프레임에 추가
 		mainframe.add(MacInPut); // 맥 입력창 메인 프레임에 추가
 		
