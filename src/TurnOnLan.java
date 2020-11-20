@@ -49,7 +49,7 @@ class TurnOnLan {
 	        }
 	        catch (Exception e) {
 	            System.out.println("패킷 전송 실패 맥주소나 아이피 주소 확인 바람 : " + e);
-	            System.exit(1);
+	          // System.exit(1); // 강제 종료말고 alert창 띄울 수 있으면 alert로 할 예정
 	        }
 	}
 	

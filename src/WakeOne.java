@@ -73,7 +73,10 @@ class InformationAction implements ActionListener {
 	System.out.println("getIp로 받아온 아이피 : " + Ip_Mac_InPut.getIp());
 	System.out.println("getMac로 받아온 아이피 : " + Ip_Mac_InPut.getMac());
 	System.out.println("정보추가 버튼 이벤트 호출");
-
+	TextLoading FileWrite = new TextLoading();
+	// FileWrite.FileLoading(Ip_Mac_InPut.getIp(), Ip_Mac_InPut.getMac());
+	FileWrite.FileWrite(); // 버튼 클릭시 파일 쓰기 함수 호출
+	
 	}
 	
 }
@@ -269,7 +272,7 @@ public class WakeOne extends JFrame{
 			public void actionPerformed(ActionEvent e) { // 익명함수 호출, 값 받아오기
 				Ip_Mac_InPut value = new Ip_Mac_InPut();
 				value.setIp(IpInPut.getText());
-				value.setMac(IpInPut.getText());
+				value.setMac(MacInPut.getText());
 				
 				System.out.println("IpInPut 입력받은 값 : " + IpInPut.getText());
 				System.out.println("MacInPut 입력받은 값 : " + MacInPut.getText());
