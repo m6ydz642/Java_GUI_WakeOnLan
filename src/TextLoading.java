@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import javax.swing.JOptionPane;
+
 class TextLoading{
 	private final static Logger log = Logger.getGlobal();
 	
 public void FileWrite(){ // 파일등록
 	System.out.println("파일 쓰기 함수 호출");
 	File file = new File("ip.txt"); // 파일 객체 생성
+	JOptionPane Message = new JOptionPane(); // 메시지 객체 호출
+	
 	String path = file.getAbsolutePath(); // 파일경로 읽어 오기
 	try {
 		
@@ -24,15 +28,16 @@ public void FileWrite(){ // 파일등록
 		BufferedWriter bw = new BufferedWriter(fw); 
 		
 		// bw.newLine(); // 행바꾸기하니까 제대로 안되서 일단 제외 조만간 JSON으로 수정할까 생각중
-		bw.write(Ip_Mac_InPut.getIp() + ";"); // 세미콜론으로 구분지어줘야 해서 추가
+		bw.write(Ip_Mac_InPut.getIp() + "; "); // 세미콜론으로 구분지어줘야 해서 추가
 		// bw.newLine(); // 버퍼에 띄어쓰기 삽입
 		bw.write(Ip_Mac_InPut.getMac() + "; ");
 		// bw.newLine(); // 버퍼에 띄어쓰기 삽입
 		bw.flush(); // 버퍼 내용  파일에 쓰기 
 		System.out.println("파일 읽기 함수 호출");
-		
+		Message.showMessageDialog(null, "정보추가 완료 프로그램을 재실행 주세요");
 	} catch (Exception e) {
 		System.out.println("파일 쓰기 예외 발생 : " + e);
+		Message.showMessageDialog(null, "파일추가 오류 발생 뭘 잘못했는지 다시한번 보세요 ㅋㅋ");
 	}
 
 	

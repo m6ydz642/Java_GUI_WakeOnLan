@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 class TurnOnLan {
 	public static final int PORT = 9;    
-	static JOptionPane ErrorMessage = new JOptionPane(); // 에러메시지 객체 호출
+	static JOptionPane ErrorMessage = new JOptionPane(); // 메시지 객체 호출
 	
 	public void TurnOnLan() {
 		GetSet_IP_Mac iplist = new GetSet_IP_Mac();

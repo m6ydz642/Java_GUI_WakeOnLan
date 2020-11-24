@@ -260,7 +260,7 @@ public class WakeOne extends JFrame{
 		
 		System.out.println("macaddress_text : " + macaddress_text[1]);
 		System.out.println("alltext : " + alltext);
-		IpInPut = new JTextField("저장할 아이피를 입력하세요"); // 객체 생성 하면서 뷰 보여줌
+		IpInPut = new JTextField("저장할 브로드 캐스트 아이피를 입력하세요"); // 객체 생성 하면서 뷰 보여줌
 		// text field 내용
 		MacInPut = new JTextField("저장할 맥 주소를 입력하세요");
 		
