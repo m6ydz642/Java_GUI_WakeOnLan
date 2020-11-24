@@ -122,7 +122,7 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 		
 		String plusIP_mac = null;
 		List <String> ip_mac = new ArrayList<String>(); 
-		// 받아온걸 다시 리스트로 넣음 ㅡ.ㅡ 저 JComboBox가스트링 인자 2개가 지원안함
+		// 받아온걸 다시 리스트로 넣음 ㅡ.ㅡ 저 JComboBox가 스트링 인자 2개를 지원안함
 		
 		
 		for (int i = 0; i<ip_text.length-1; i+=2) { 		 // 출력 테스트용
@@ -181,11 +181,43 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 
 }
 /*****************************************************************/
-class IpListValue extends JButton{ 
-	public Component IpList() {
+class AllTurnOnButton extends JButton implements ActionListener{ 
+	/*public Component IpList() {
 		JButton Start = new JButton("전체부팅 하기"); 
 		Start.setBounds(469,64,200,30); // 텍스트 필드 
+	
 		return Start;
+	}*/
+	public void TurnOnAll(String[] ip_text, String[] mac_text) {
+		String plusIP_mac = null;
+		List <String> ip_mac = new ArrayList<String>(); 
+		
+		
+		for (int i = 0; i<ip_text.length-1; i+=2) { 	
+			/*
+			 * ip_text[0]는 아이피 
+			 * macaddress_text[1]에는 맥주소 들어있음
+			 * 
+			 * 어쩌다 보니 0 2 4 6 8등 짝수 형태는 아이피
+			 * 홀수 형태는 무조건 mac주소가 됨
+			 * */
+			
+			int j =0;
+			j = i+1; // j에다 i값 플러스
+			plusIP_mac = ip_text[i] + mac_text[j];
+			System.out.println("전체부팅 버튼 함수 아이피 : " + ip_text[i]);
+			System.out.println("전체부팅 버튼 함수 맥 : " + mac_text[j]);
+			
+			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
+		
+			
+		} 
+		System.out.println("전체부팅 버튼 리스트 : " + ip_mac);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("전체부팅 액션 호출");
+		
 	}
 }
 
@@ -224,11 +256,13 @@ public class WakeOne extends JFrame{
 		/*********************************************************************/
 		// 메인 프레임에 붙는 정보들
 		JFrame mainframe = new JFrame("WakeOnLan JAVA");
-		JButton TurnonAll = new JButton("부팅");
+		JButton Turnon = new JButton("부팅");
 		JTextField IpInPut; // 아이피 입력할 텍스트 창
 		JTextField MacInPut; // 맥주소 입력할 텍스트 창
 		// TurnOnLan IP = new TurnOnLan();
 		JButton AddInformation = new JButton("정보추가 하기"); // 그냥 main안에서 하는걸로
+		JButton TurnOnAll = new JButton("전체부팅 하기"); 
+	
 		/*********************************************************************/
 	
 	
@@ -241,10 +275,11 @@ public class WakeOne extends JFrame{
 		mainframe.setVisible(true); // 창을 화면에 나타낼 것인지
 		mainframe.setSize(800, 400); // 메인 프레임 사이즈 
 		mainframe.setLayout(null); 
-		TurnonAll.setBounds(47,57,95,30); // x, y, height,width 
+		Turnon.setBounds(47,57,95,30); // x, y, height,width 
 		/*********************************************************************/
-		mainframe.add(TurnonAll); // 메인 프레임에 버튼 추가해서 넣기
+		mainframe.add(Turnon); // 메인 프레임에 버튼 추가해서 넣기
 		mainframe.add(AddInformation); // 아이피 & 맥주소 추가 버튼 
+		
 		/*********************************************************************/
 		System.out.println("프로그램 실행 콘솔");
 		
@@ -286,11 +321,11 @@ public class WakeOne extends JFrame{
 		
 		IpInPut.setBounds(221,192,200,30); // 아이피 입력창 텍스트 필드 위치 
 		MacInPut.setBounds(228, 262, 200, 30); // 맥주소 입력창 텍스트 필드 위치
-
+		TurnOnAll.setBounds(469,64,200,30); // 전체 부팅 버튼 위치
 		
 		mainframe.add(IpInPut); // 아이피 입력창 메인프레임에 추가
 		mainframe.add(MacInPut); // 맥 입력창 메인 프레임에 추가
-		
+		mainframe.add(TurnOnAll); // 전체 부팅 버튼 추가
 		
 		MouseEvent mouseevent = new MouseEvent(); // 마우스 이벤트 객체 호출
 		// 좌표 설정 할때 사용하려고 만듦
@@ -298,26 +333,24 @@ public class WakeOne extends JFrame{
 		
 		
 		 TurnonButton Turnbutton = new TurnonButton();
-		 TurnonAll.addActionListener(Turnbutton); // 버튼 클릭 이벤트 호출
+		 Turnon.addActionListener(Turnbutton); // 일반 버튼 클릭 이벤트 호출
 	
-
-		 IpListValue IpButton = new IpListValue(); 
-		 
-		 mainframe.add(IpButton.IpList()); // 메인 프레임에 추가
-		 System.out.println("iplist 내용 : " + IpButton);
-
+ /**********************************************************************전체부팅*/ 
+		 AllTurnOnButton TurnAll = new AllTurnOnButton(); 
+		 TurnAll.TurnOnAll(ip_text, macaddress_text); // 전체부팅 버튼전에 미리 아이피, 맥주소 넣어서 호출
+		 TurnOnAll.addActionListener(TurnAll); // 전체부팅 버튼 이벤트 리스너 호출
+	
+ /**********************************************************************선택박스*/ 
 		 SelectBox cb = new SelectBox();
-			
-		 
 		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가
 		 // 리스트 박스 호출해서 사용해서 쓸대 리스너도 같이 호출해서 별도로 호출 안해도 됨
-	 
+/**********************************************************************상단 메뉴바*/
 		 MyMenu MainMenu = new MyMenu();
 		 mainframe.add(MainMenu); // 메인 프레임에 메인 메뉴 추가
 		 mainframe.setJMenuBar(MainMenu.mb); // 이시끼 없어서 계속 뻘짓함 ㅡ.ㅡ ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 		 						// MainMenu -> mb 멤버 변수에서 가져옴
 		 						// 메인 프레임에 메뉴바 추가
-
+ /***********************************************************************/
 		 
 		
 		 
