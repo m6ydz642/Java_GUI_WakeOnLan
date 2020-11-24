@@ -181,14 +181,14 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 
 }
 /*****************************************************************/
-class AllTurnOnButton extends JButton implements ActionListener{ 
+class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부팅 클래스
 	/*public Component IpList() {
 		JButton Start = new JButton("전체부팅 하기"); 
 		Start.setBounds(469,64,200,30); // 텍스트 필드 
 	
 		return Start;
 	}*/
-	public void TurnOnAll(String[] ip_text, String[] mac_text) {
+	public List<String> TurnOnAll(String[] ip_text, String[] mac_text) {
 		String plusIP_mac = null;
 		List <String> ip_mac = new ArrayList<String>(); 
 		
@@ -213,7 +213,10 @@ class AllTurnOnButton extends JButton implements ActionListener{
 			
 		} 
 		System.out.println("전체부팅 버튼 리스트 : " + ip_mac);
+		System.out.println("전체부팅 버튼 리스트 길이 : " + ip_mac.size());
+		return ip_mac;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("전체부팅 액션 호출");
@@ -230,7 +233,8 @@ class TurnonButton extends JButton implements ActionListener { // 버튼 액션 
 		addActionListener(this);
 	 System.out.println("TurnOnButton 클릭됨 ->  " + e.getActionCommand());
 		GetSet_IP_Mac cb = new GetSet_IP_Mac() ;
-		System.out.println("부팅 버튼 호출 getter ip값 : " + cb.getIp());
+		System.out.println("부팅 버튼 호출 getter ip값 : " + cb.getIp()); 
+		// 이미 selectBox에서 set아이피로 set해놔서 여기서는 get해서 가져오기만 하면 됨 
 		
 	 TurnOnLan LanAction = new TurnOnLan(); // TurnOnLan객체 생성
 		LanAction.TurnOnLan(); // WakeOnLan함수 호출
