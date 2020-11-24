@@ -251,12 +251,15 @@ public class WakeOne extends JFrame{
 		String alltext = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
 		String[] ip_text = alltext.split("; "); // 아이피 부분 한칸 띄움, txt파일 저장 형식이 아이피; 맥주소 형식이라 --> ; 아이피로 나눔
-	//	System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
+		System.out.println("ip_text : " + ip_text[0]); // 0번째는 아이피
 	//	공백 등 toString 자체 양식 제거 (오버라이딩으로 재정의 해서 쓰려고 했는데 안됨 ㅡ.ㅡ;;)
 	
-		String[] macaddress_text = alltext.split(";"); // 맥주소 마지막 부분은 붙임 다음 아이피에서 다시 띄움 아이피->맥주소 순
+		String[] macaddress_text = alltext.split(";"); // 세미콜론까지 나눔
+		// 맥주소 부분을 alltext.split("; ");이렇게 하면 아이피; 맥주소; 할때  앞에 공백부분 때문에 아이피랑 붙어버림
+		// ip.txt에서 원래 앞부분은 먼저 공백한칸하고 아이피로 들어가야 하는데 TurnOnLan클래스에서 공백을 다시 분해함
 		
-	//	System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
+		System.out.println("macaddress_text : " + macaddress_text[1]);
+		System.out.println("alltext : " + alltext);
 		IpInPut = new JTextField("저장할 아이피를 입력하세요"); // 객체 생성 하면서 뷰 보여줌
 		// text field 내용
 		MacInPut = new JTextField("저장할 맥 주소를 입력하세요");

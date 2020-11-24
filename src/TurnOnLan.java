@@ -20,13 +20,15 @@ class TurnOnLan {
 	    // String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
-		     String[] ipStr = iplist.getIp().split(" "); // try문 밖에서 널포인터 오류시 
-		     //예외 처리 안되서 try문 안으로 넣음
-		     String[] macStr = iplist.getMac().split(" "); 
+		     String[] ipStr = iplist.getIp().split(" "); // 아이피 부분은 WakeOneLan클래스에서 
+		     // split("; ");로 인해 나눠져서 필요없지만 밑에 맥주소는 형식이 맥주소; (공백) 이라서 split해줘야 함
+		     
+		     // try문 밖에서 널포인터 오류시 예외 처리 안되서 try문 안으로 넣음
+		     String[] macStr = iplist.getMac().split(" ");  // 맥주소 마지막에서 세미콜론으로 구분지어진 다음에 공백이 생겨서 공백부터 나눔 
 			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
 			 // 별도로 몇번째 아이피인지 다시 안세도 됨
-		    ipStr[0] = ipStr[0].replaceAll(" ", "");
-		     macStr[1] = macStr[1].replaceAll(" ", "");
+		  /*  ipStr[0] = ipStr[0].replaceAll(" ", "");
+		     macStr[1] = macStr[1].replaceAll(" ", "");*/
 		     
 			 System.out.println("나눈 아이피 : " + ipStr[0]);
 			 
