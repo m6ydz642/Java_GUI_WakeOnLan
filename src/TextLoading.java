@@ -23,11 +23,11 @@ public void FileWrite(){ // 파일등록
 		// 기존파일 + append된다고 명시 되어있음
 		BufferedWriter bw = new BufferedWriter(fw); 
 		
-		bw.newLine();
+		// bw.newLine(); // 행바꾸기하니까 제대로 안되서 일단 제외 조만간 JSON으로 수정할까 생각중
 		bw.write(Ip_Mac_InPut.getIp() + ";"); // 세미콜론으로 구분지어줘야 해서 추가
-		bw.newLine(); // 버퍼에 띄어쓰기 삽입
-		bw.write(Ip_Mac_InPut.getMac() + ";");
-		// bw.newLine(); // 버퍼에 삽입
+		// bw.newLine(); // 버퍼에 띄어쓰기 삽입
+		bw.write(Ip_Mac_InPut.getMac() + "; ");
+		// bw.newLine(); // 버퍼에 띄어쓰기 삽입
 		bw.flush(); // 버퍼 내용  파일에 쓰기 
 		System.out.println("파일 읽기 함수 호출");
 		
@@ -59,7 +59,7 @@ public void FileWrite(){ // 파일등록
 			//	System.out.print((char)fileread); // 강제 형변환
 
 				 contentList = Character.toString((char)fileread); // char 타입을 String으로 형변환
-				
+			// contentList.replaceAll(" ", ""); // 음....
 			//	System.out.println("contentlist 내용 : " + contentList);
 				content.add(contentList); // 리스트에 추가
 

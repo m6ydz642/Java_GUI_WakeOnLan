@@ -134,7 +134,7 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 			 * 홀수 형태는 무조건 mac주소가 됨
 			 * */
 			
-			int j =0, count = 0, sum =0 ;
+			int j =0;
 			j = i+1; // j에다 i값 플러스
 			plusIP_mac = ip_text[i] + mac_text[j];
 			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
@@ -183,7 +183,7 @@ class SelectBox extends JComboBox implements ActionListener{  // 클래스 밖�
 /*****************************************************************/
 class IpListValue extends JButton{ 
 	public Component IpList() {
-		JButton Start = new JButton("전체부팅 하기"); // 요놈을 어떻게 할까.......
+		JButton Start = new JButton("전체부팅 하기"); 
 		Start.setBounds(469,64,200,30); // 텍스트 필드 
 		return Start;
 	}
@@ -250,11 +250,12 @@ public class WakeOne extends JFrame{
 		
 		String alltext = contentlist.toString().replaceAll("^\\[", "")
 				.replaceAll("\\]$", "").replace(", ", "");
-		String[] ip_text = alltext.split(";");
+		String[] ip_text = alltext.split("; "); // 아이피 부분 한칸 띄움, txt파일 저장 형식이 아이피; 맥주소 형식이라 --> ; 아이피로 나눔
 	//	System.out.println("ip address : " + ip_text[0]); // 0번째는 아이피
 	//	공백 등 toString 자체 양식 제거 (오버라이딩으로 재정의 해서 쓰려고 했는데 안됨 ㅡ.ㅡ;;)
 	
-		String[] macaddress_text = alltext.split(";");
+		String[] macaddress_text = alltext.split(";"); // 맥주소 마지막 부분은 붙임 다음 아이피에서 다시 띄움 아이피->맥주소 순
+		
 	//	System.out.println("mac address : " + macaddress_text[1]); // 배열의 첫번째는 맥주소
 		IpInPut = new JTextField("저장할 아이피를 입력하세요"); // 객체 생성 하면서 뷰 보여줌
 		// text field 내용

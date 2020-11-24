@@ -16,20 +16,21 @@ class TurnOnLan {
 		  
 		List<String> SplitIpList = new ArrayList<String> ();
 		SplitIpList.add(iplist.getIp() ); // 아이피주소에 맥주소가 같이 있어서 그 다음 배열이 무조건 맥주소임
-	    
-	    String[] test = SplitIpList.toString().split(" "); // 테스트
-
-	
+	    	
 	    // String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
-		     String[] ipStr = iplist.getIp().split(" "); // try문 밖에서 널페인터 오류시 
+		     String[] ipStr = iplist.getIp().split(" "); // try문 밖에서 널포인터 오류시 
 		     //예외 처리 안되서 try문 안으로 넣음
 		     String[] macStr = iplist.getMac().split(" "); 
 			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
 			 // 별도로 몇번째 아이피인지 다시 안세도 됨
+		    ipStr[0] = ipStr[0].replaceAll(" ", "");
+		     macStr[1] = macStr[1].replaceAll(" ", "");
+		     
 			 System.out.println("나눈 아이피 : " + ipStr[0]);
-			 System.out.println("나눈 맥주소 " + macStr[1]);
+			 
+			 System.out.println("나눈 맥주소 : " + macStr[1]);
 			
 	            byte[] macBytes = getMacBytes(macStr[1]);
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
@@ -41,6 +42,8 @@ class TurnOnLan {
 	            }
 	            
 	            InetAddress address = InetAddress.getByName(ipStr[0]);
+	            System.out.println("들어온 아이피 " + address);
+	            System.out.println("들어온 맥 주소 " + macStr[0]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
 	            DatagramSocket socket = new DatagramSocket();
 	            socket.send(packet);
