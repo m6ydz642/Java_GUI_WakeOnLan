@@ -191,7 +191,7 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 	public List<String> TurnOnAll(String[] ip_text, String[] mac_text) {
 		String plusIP_mac = null;
 		List <String> ip_mac = new ArrayList<String>(); 
-		
+		GetSet_IP_Mac ip = new GetSet_IP_Mac();
 		
 		for (int i = 0; i<ip_text.length-1; i+=2) { 	
 			/*
@@ -209,7 +209,7 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 			System.out.println("전체부팅 버튼 함수 맥 : " + mac_text[j]);
 			
 			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
-		
+	
 			
 		} 
 		System.out.println("전체부팅 버튼 리스트 : " + ip_mac);
@@ -217,9 +217,15 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 		return ip_mac;
 	}
 	
+	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // 전체부팅 버튼 액션
 		System.out.println("전체부팅 액션 호출");
+		GetSet_IP_Mac ip = new GetSet_IP_Mac();
+		 ip.setIp("아이피"); // 잠시 하드코딩된 상태로 둠
+		 ip.setMac("맥주소");
+		TurnOnLan TurnOnAll = new TurnOnLan(); // TurnOnLan객체 생성
+		TurnOnAll.TurnOnAllLan(); // WakeOnLan함수 호출
 		
 	}
 }
