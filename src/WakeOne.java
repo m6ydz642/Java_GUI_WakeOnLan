@@ -218,15 +218,15 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 	}
 	
 	
-	@Override
+@Override
 	public void actionPerformed(ActionEvent e) { // 전체부팅 버튼 액션
-		System.out.println("전체부팅 액션 호출");
-		GetSet_IP_Mac ip = new GetSet_IP_Mac();
+		System.out.println("전체부팅 액션 호출 - 이 액션 안씀");
+/*		GetSet_IP_Mac ip = new GetSet_IP_Mac();
 		 ip.setIp("아이피"); // 잠시 하드코딩된 상태로 둠
 		 ip.setMac("맥주소");
 		TurnOnLan TurnOnAll = new TurnOnLan(); // TurnOnLan객체 생성
 		TurnOnAll.TurnOnAllLan(); // WakeOnLan함수 호출
-		
+*/		
 	}
 }
 
@@ -348,8 +348,19 @@ public class WakeOne extends JFrame{
  /**********************************************************************전체부팅*/ 
 		 AllTurnOnButton TurnAll = new AllTurnOnButton(); 
 		 TurnAll.TurnOnAll(ip_text, macaddress_text); // 전체부팅 버튼전에 미리 아이피, 맥주소 넣어서 호출
-		 TurnOnAll.addActionListener(TurnAll); // 전체부팅 버튼 이벤트 리스너 호출
-	
+		// TurnOnAll.addActionListener(TurnAll); // 전체부팅 버튼 이벤트 리스너 호출
+		 TurnOnAll.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) { // 전체부팅 액션 여기서 호출해서 getip로 보냄
+					System.out.println("전체부팅 액션 호출");
+					GetSet_IP_Mac ip = new GetSet_IP_Mac();
+					 ip.setAllip_mac(TurnAll.TurnOnAll(ip_text, macaddress_text)); 
+					TurnOnLan TurnOnAll = new TurnOnLan(); // TurnOnLan객체 생성
+					TurnOnAll.TurnOnAllLan(); // WakeOnLan함수 호출
+					
+				}
+		});
  /**********************************************************************선택박스*/ 
 		 SelectBox cb = new SelectBox();
 		 mainframe.add(cb.ListBox(ip_text, macaddress_text)); // ComboBox 메인 프레임에 추가

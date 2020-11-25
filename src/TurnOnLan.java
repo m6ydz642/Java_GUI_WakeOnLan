@@ -12,18 +12,18 @@ class TurnOnLan {
 	
 	public void TurnOnAllLan() { // 전체부팅으로 부팅하는 경우
 		List<String> SplitIpList = new ArrayList<String> ();
-		GetSet_IP_Mac alliplist = new GetSet_IP_Mac();
+		GetSet_IP_Mac GetAlliplist = new GetSet_IP_Mac();
 		
 		  
 		
-	     String[] ipStr = alliplist.getIp().split(" "); 
+	   //  String[] ipStr = alliplist.getIp().split(" "); 
+		    String[] ipStr = new String[5];
+		    String[] macStr = new String[5];
 		    
-	     
-		    
-	     String[] macStr = alliplist.getMac().split(" ");   
+	    // String[] macStr = alliplist.getMac().split(" ");   
 
 	     
-		SplitIpList.add(alliplist.getIp());
+		SplitIpList.addAll(GetAlliplist.getAllip_mac());
 
 	        
 		 try {
