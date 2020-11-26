@@ -1,11 +1,37 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class GetSet_IP_Mac {
 
 	private static String ip; // 아이피 값 전달용
 	private static String mac; // 맥주소 전달용 (ip에 맥주소 까지 같이 나와서 사실 필요없음 ㅋㅋ)
-	private static List<String> allip_mac;
+
+	private static Map<String, String> allip_mac;
+
+	/*public static Map<String, String> getAllip_mac() {
+		Map<String,String> ip = new HashMap<String, String>();
+		
+		System.out.println("getAllIp_mac 호출");
+		System.out.println("get allip_mac 값 " + allip_mac);
+		ip.putAll(allip_mac);
+		return ip;
+	}*/
+
+	public static Map<String, String> getAllip_mac() {
+		
+		System.out.println("getAllIp_mac 호출");
+		System.out.println("get allip_mac 값 " + allip_mac);
+		return allip_mac;
+	}
+	public static void setAllip_mac(Map<String, String> map) {
+		System.out.println("setAllIp mac 호출");
+		System.out.println("setAllIp list : " + map);
+		GetSet_IP_Mac.allip_mac = map;
+	}
+	
+	/*	private static List<String> allip_mac;
 
 	public static List<String> getAllip_mac() {
 		List<String> ip = new ArrayList<String>();
@@ -20,7 +46,7 @@ class GetSet_IP_Mac {
 		System.out.println("setAllIp mac 호출");
 		System.out.println("setAllIp list : " + list);
 		GetSet_IP_Mac.allip_mac = list;
-	}
+	}*/
 	
 /*	private static  String[] allip_mac;
 	

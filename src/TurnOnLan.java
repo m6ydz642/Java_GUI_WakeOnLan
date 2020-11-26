@@ -2,6 +2,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,31 +15,44 @@ class TurnOnLan{
 	
 	public void TurnOnAllLan(){ // 전체부팅으로 부팅하는 경우
 		System.out.println("전체부팅 함수 호출");
-		List<String> SplitIpList = new ArrayList<String> ();
+
 		GetSet_IP_Mac GetAlliplist = new GetSet_IP_Mac();
 
 	//	SplitIpList.addAll(GetAlliplist.getAllip_mac());
 		
 			// String[] ipStr = GetAlliplist.getAllip_mac().split(" "); 
+		Map <String,String> a = new HashMap <String, String>();
 		
-			String[] ipStr = (String[]) GetAlliplist.getAllip_mac().toArray(); // 리스트 타입을 오브젝트에 배열로 저장
+		// String[] key = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
+		
+	   // 	String[] key = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
+//			Object[] ipStr = GetAlliplist.getAllip_mac().entrySet().toArray(); // 리스트 타입을 오브젝트에 배열로 저장
+			Object[] ipStr = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
+		//	 Object[] macStr = GetAlliplist.getAllip_mac().entrySet().toArray();
+			Object[] macStr = GetAlliplist.getAllip_mac().values().toArray(new String[0]); // 값만 꺼내기
+			
+			Object[] keys = GetAlliplist.getAllip_mac().values().toArray();
+			System.out.println("keys : " + keys[0]);
+			
+			System.out.println("해쉬맵 : " + GetAlliplist.getAllip_mac().entrySet().toArray());
+			
 			System.out.println("ipStr 내용 : " + GetAlliplist.getAllip_mac().toString());
 /*		    String[] ipStr = new String[5]; // 잠시 임시로 해놈
 		    String[] macStr = new String[5];*/
 		    System.out.println("스트링 내용 " + ipStr.toString());
 	    // String[] macStr = GetAlliplist.getMac().split(" ");
 		
-		    String[] macStr = (String[]) GetAlliplist.getAllip_mac().toArray();
-/*		    String test = "test";
-String[] macStr = new String[1];
-macStr[0] = "testmac";*/
-
-	//	SplitIpList.addAll(GetAlliplist.getAllip_mac()); // 리스트 + 리스트 타입이라 addAll로 됨 
+		   
+		    System.out.println("macStr 내용 : " + macStr[1]);
+		    
+		
+		    
+		  System.out.println("arrays key : " + Arrays.toString(ipStr));
+		  
 		    
 		System.out.println("ipstr길이 : " + ipStr.length);
 	        
 		 try {
-			 GetSet_IP_Mac ip = new GetSet_IP_Mac();
 				
 				for (int k = 0; k<=ipStr.length; k+=2) { 	
 				System.out.println("for문 호출 : " + k);
@@ -49,7 +63,7 @@ macStr[0] = "testmac";*/
 			 
 			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[j]);
 			
-	            byte[] macBytes = getMacBytes((String) macStr[k]); // String타입으로 캐스팅
+	            byte[] macBytes = getMacBytes(macStr[k].toString()); // String타입으로 캐스팅
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
 	            for (int i = 0; i < 6; i++) {
 	                bytes[i] = (byte) 0xff;
@@ -58,7 +72,7 @@ macStr[0] = "testmac";*/
 	                System.arraycopy(macBytes, 0, bytes, i, macBytes.length);
 	            }
 	            
-	            InetAddress address = InetAddress.getByName((String) ipStr[k]);
+	            InetAddress address = InetAddress.getByName(ipStr[k].toString());
 	            System.out.println("TurnOnAllLan 들어온 아이피 " + address);
 	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[j]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
