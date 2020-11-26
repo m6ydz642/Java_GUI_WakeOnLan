@@ -6,24 +6,29 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-class TurnOnLan {
+class TurnOnLan{
 	public static final int PORT = 9;    
 	static JOptionPane ErrorMessage = new JOptionPane(); // 메시지 객체 호출
 	
-	public void TurnOnAllLan() { // 전체부팅으로 부팅하는 경우
+	public void TurnOnAllLan(){ // 전체부팅으로 부팅하는 경우
+		System.out.println("전체부팅 함수 호출");
 		List<String> SplitIpList = new ArrayList<String> ();
 		GetSet_IP_Mac GetAlliplist = new GetSet_IP_Mac();
 		
 		  
 		
-	   //  String[] ipStr = alliplist.getIp().split(" "); 
-		    String[] ipStr = new String[5];
-		    String[] macStr = new String[5];
+	//   List <String> ipStr = new ArrayList<String>();
+	  // String[] ipStr = GetAlliplist.getAllip_mac().split(" "); 
+	 Object[] ipStr =  GetAlliplist.getAllip_mac().toArray();
+/*		    String[] ipStr = new String[5]; // 잠시 임시로 해놈
+		    String[] macStr = new String[5];*/
 		    
-	    // String[] macStr = alliplist.getMac().split(" ");   
-
-	     
-		SplitIpList.addAll(GetAlliplist.getAllip_mac());
+	    // String[] macStr = GetAlliplist.getMac().split(" ");
+	Object[] macStr = GetAlliplist.getAllip_mac().toArray();
+	
+	    
+	    
+		SplitIpList.addAll(GetAlliplist.getAllip_mac()); // 리스트 + 리스트 타입이라 addAll로 됨 
 
 	        
 		 try {
@@ -33,7 +38,7 @@ class TurnOnLan {
 			 
 			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[1]);
 			
-	            byte[] macBytes = getMacBytes(macStr[1]);
+	            byte[] macBytes = getMacBytes((String) macStr[1]); // String타입으로 캐스팅
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
 	            for (int i = 0; i < 6; i++) {
 	                bytes[i] = (byte) 0xff;
@@ -42,7 +47,7 @@ class TurnOnLan {
 	                System.arraycopy(macBytes, 0, bytes, i, macBytes.length);
 	            }
 	            
-	            InetAddress address = InetAddress.getByName(ipStr[0]);
+	            InetAddress address = InetAddress.getByName((String) ipStr[0]);
 	            System.out.println("TurnOnAllLan 들어온 아이피 " + address);
 	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[0]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
@@ -51,7 +56,7 @@ class TurnOnLan {
 	            socket.close();
 	            
 	            System.out.println("TurnOnAllLan Wake-on-LAN 패킷 전송 ");
-	            System.out.println("TurnOnAllLan 전송 아이피 : " + ipStr[0]);
+	            System.out.println("TurnOnAllLan 전송 아이피 : " + ipStr);
 	            System.out.println("TurnOnAllLan 전송 맥주소 " + macStr[1]);
 	            // 프로그램 실행하면서 로딩한 아이피 보여주기
 	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
@@ -72,7 +77,6 @@ class TurnOnLan {
 		List<String> SplitIpList = new ArrayList<String> ();
 		SplitIpList.add(iplist.getIp() ); // 아이피주소에 맥주소가 같이 있어서 그 다음 배열이 무조건 맥주소임
 	    	
-	    // String macStr = "D8:D3:85:00:5A:A9";
 	        
 		 try {
 		     String[] ipStr = iplist.getIp().split(" "); // 아이피 부분은 WakeOneLan클래스에서 
@@ -82,6 +86,7 @@ class TurnOnLan {
 		     String[] macStr = iplist.getMac().split(" ");  // 맥주소 마지막에서 세미콜론으로 구분지어진 다음에 공백이 생겨서 공백부터 나눔 
 			 // 가져온 주소는 무조건 1가지의 형태 즉 아이피,맥 (0번과 1번) 한가지라 
 			 // 별도로 몇번째 아이피인지 다시 안세도 됨
+		     
 		  /*  ipStr[0] = ipStr[0].replaceAll(" ", "");
 		     macStr[1] = macStr[1].replaceAll(" ", "");*/
 		     
