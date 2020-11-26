@@ -6,10 +6,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
 class TurnOnLan{
+	private final static Logger log = Logger.getGlobal();
 	public static final int PORT = 9;    
 	static JOptionPane ErrorMessage = new JOptionPane(); // 메시지 객체 호출
 	
@@ -21,47 +23,38 @@ class TurnOnLan{
 	//	SplitIpList.addAll(GetAlliplist.getAllip_mac());
 		
 			// String[] ipStr = GetAlliplist.getAllip_mac().split(" "); 
-		Map <String,String> a = new HashMap <String, String>();
+		Map <String,String> test = new HashMap <String, String>();
 		
 		// String[] key = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
-		
-	   // 	String[] key = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
+
 //			Object[] ipStr = GetAlliplist.getAllip_mac().entrySet().toArray(); // 리스트 타입을 오브젝트에 배열로 저장
-			Object[] ipStr = GetAlliplist.getAllip_mac().keySet().toArray(new String[0]); // 키만 꺼내기
-		//	 Object[] macStr = GetAlliplist.getAllip_mac().entrySet().toArray();
-			Object[] macStr = GetAlliplist.getAllip_mac().values().toArray(new String[0]); // 값만 꺼내기
+			Object[] ipStr = GetAlliplist.getAllip_mac().keySet().toArray(); // 키만 꺼내기
+
+			Object[] macStr = GetAlliplist.getAllip_mac().values().toArray(); // 값만 꺼내기
 			
 			Object[] keys = GetAlliplist.getAllip_mac().values().toArray();
-			System.out.println("keys : " + keys[0]);
-			
-			System.out.println("해쉬맵 : " + GetAlliplist.getAllip_mac().entrySet().toArray());
-			
-			System.out.println("ipStr 내용 : " + GetAlliplist.getAllip_mac().toString());
-/*		    String[] ipStr = new String[5]; // 잠시 임시로 해놈
-		    String[] macStr = new String[5];*/
-		    System.out.println("스트링 내용 " + ipStr.toString());
-	    // String[] macStr = GetAlliplist.getMac().split(" ");
-		
+
+			  GetAlliplist.getAllip_mac().replace("192.168.0.255", "테스트");
+			  
+		    System.out.println("ipStr  내용 : " + ipStr[0]);
+		    System.out.println("macStr 내용 : " + macStr[0]);
+	
+		 
 		   
-		    System.out.println("macStr 내용 : " + macStr[1]);
-		    
-		
-		    
-		  System.out.println("arrays key : " + Arrays.toString(ipStr));
-		  
-		    
 		System.out.println("ipstr길이 : " + ipStr.length);
 	        
 		 try {
-				
-				for (int k = 0; k<=ipStr.length; k+=2) { 	
+				// hashMap으로 할때 0번째는 아이피, 2번째는 맥주소 개념으로 안들어가고 키와 값으로 들어가서
+			 // 이제 짝수로 배열 할 필요없음
+			 // ipStr은 무조건 key에 아이피고 macStr은 무조건 맥주소임
+				for (int k = 0; k<ipStr.length; k++) { 	
 				System.out.println("for문 호출 : " + k);
 					int j =0;
-					j = k+1; // j에다 i값 플러스
+				//	j = k+1; // j에다 i값 플러스
 					
 			 System.out.println("TurnOnAllLan 나눈 아이피 : " + ipStr[k]);
 			 
-			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[j]);
+			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[k]);
 			
 	            byte[] macBytes = getMacBytes(macStr[k].toString()); // String타입으로 캐스팅
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
@@ -74,14 +67,14 @@ class TurnOnLan{
 	            
 	            InetAddress address = InetAddress.getByName(ipStr[k].toString());
 	            System.out.println("TurnOnAllLan 들어온 아이피 " + address);
-	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[j]);
+	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[k]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
 	            DatagramSocket socket = new DatagramSocket();
 	            socket.send(packet);
 	            socket.close();
-	            
+	            log.info("부팅완료!!!");
 	            System.out.println("TurnOnAllLan Wake-on-LAN 패킷 전송 ");
-	            System.out.println("TurnOnAllLan 전송 아이피 : " + ipStr);
+	            System.out.println("TurnOnAllLan 전송 아이피 : " + ipStr[k]);
 	            System.out.println("TurnOnAllLan 전송 맥주소 " + macStr[k]);
 	            // 프로그램 실행하면서 로딩한 아이피 보여주기
 	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 

@@ -227,11 +227,14 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 
 		GetSet_IP_Mac ip = new GetSet_IP_Mac();
 		
+		System.out.println("TurnOnAll 함수 인자로 전달받은 ip_text길이 : " + ip_text.length);
 		for (int i = 0; i<=ip_text.length-1; i+=2) { 	
 	
 			int j =0;
 			j = i+1; // j에다 i값 플러스
-			ip_mac_MapHash.put(ip_text[i], mac_text[j]); // 해쉬맵 추가
+
+			ip_mac_MapHash.put(ip_text[i], mac_text[j].replaceAll(" ", "")); // 해쉬맵 추가 하면서 맥주소 부분 공백제거
+			
 			
 		/*	plusIP_mac = ip_text[i] + mac_text[j];*/
 			System.out.println("plusIp내용 : " + ip_mac_MapHash);
