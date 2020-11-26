@@ -34,7 +34,7 @@ class TurnOnLan{
 			
 			Object[] keys = GetAlliplist.getAllip_mac().values().toArray();
 
-			  GetAlliplist.getAllip_mac().replace("192.168.0.255", "테스트");
+			//  GetAlliplist.getAllip_mac().replace("192.168.0.255", "테스트");
 			  
 		    System.out.println("ipStr  내용 : " + ipStr[0]);
 		    System.out.println("macStr 내용 : " + macStr[0]);

@@ -225,6 +225,13 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 		// List <String> ip_mac = new ArrayList<String>(); 
 		 Map<String, String> ip_mac_MapHash = new HashMap<String, String>();
 
+		 
+	 /*HashMap<String,List<String>> ipmap = new HashMap<String,List<String>>(); // 키 중복 해결하기 전용
+		 
+		 
+		 List<String> MacList = new ArrayList<String>(); // 맥 주소 값으로 쓸 리스트
+*/
+		 
 		GetSet_IP_Mac ip = new GetSet_IP_Mac();
 		
 		System.out.println("TurnOnAll 함수 인자로 전달받은 ip_text길이 : " + ip_text.length);
