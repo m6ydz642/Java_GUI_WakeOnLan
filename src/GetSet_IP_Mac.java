@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 class GetSet_IP_Mac {
@@ -7,10 +8,12 @@ class GetSet_IP_Mac {
 	private static List<String> allip_mac;
 
 	public static List<String> getAllip_mac() {
+		List<String> ip = new ArrayList<String>();
 		System.out.println("getAllIp_mac 호출");
 		System.out.println("get allip_mac 값 " + allip_mac);
-		
-		return allip_mac;
+		ip.addAll(allip_mac); // 리스트 추가
+		System.out.println("리스트 추가된 mac값 : " + ip);
+		return ip;
 	}
 
 	public static void setAllip_mac(List<String> list) {
@@ -18,7 +21,22 @@ class GetSet_IP_Mac {
 		System.out.println("setAllIp list : " + list);
 		GetSet_IP_Mac.allip_mac = list;
 	}
+	
+/*	private static  String[] allip_mac;
+	
 
+	public static String[] getAllip_mac() {
+		System.out.println("getAllIp_mac 호출");
+		System.out.println("get allip_mac 값 " + allip_mac);
+		return allip_mac;
+	}
+
+	public static void setAllip_mac(String[] allip_mac) {
+		System.out.println("setAllIp mac 호출");
+		System.out.println("setAllIp list : " + allip_mac);
+		GetSet_IP_Mac.allip_mac = allip_mac;
+	}
+*/
 	public static String getMac() {
 		System.out.println("get mac 넘어온 값 " + mac);
 		return mac;

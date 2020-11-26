@@ -188,8 +188,37 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 	
 		return Start;
 	}*/
-	public List<String> TurnOnAll(String[] ip_text, String[] mac_text) {
+	/*public List<String> TurnOnAll(String[] ip_text, String[] mac_text) {
 		String plusIP_mac = null;
+		List <String> ip_mac = new ArrayList<String>(); 
+		GetSet_IP_Mac ip = new GetSet_IP_Mac();
+		
+		for (int i = 0; i<ip_text.length-1; i+=2) { 	
+			
+			 * ip_text[0]는 아이피 
+			 * macaddress_text[1]에는 맥주소 들어있음
+			 * 
+			 * 어쩌다 보니 0 2 4 6 8등 짝수 형태는 아이피
+			 * 홀수 형태는 무조건 mac주소가 됨
+			 * 
+			
+			int j =0;
+			j = i+1; // j에다 i값 플러스
+			plusIP_mac = ip_text[i] + mac_text[j];
+			System.out.println("전체부팅 버튼 함수 아이피 : " + ip_text[i]);
+			System.out.println("전체부팅 버튼 함수 맥 : " + mac_text[j]);
+			
+			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
+	
+			
+		} 
+		System.out.println("전체부팅 버튼 리스트 : " + ip_mac);
+		System.out.println("전체부팅 버튼 리스트 길이 : " + ip_mac.size());
+		return ip_mac;
+	}*/
+	
+	public List<String> TurnOnAll(String[] ip_text, String[] mac_text) {
+		String plusIP_mac = null ;
 		List <String> ip_mac = new ArrayList<String>(); 
 		GetSet_IP_Mac ip = new GetSet_IP_Mac();
 		
@@ -205,19 +234,18 @@ class AllTurnOnButton extends JButton implements ActionListener{ // 전체 부�
 			int j =0;
 			j = i+1; // j에다 i값 플러스
 			plusIP_mac = ip_text[i] + mac_text[j];
+			// test = ip_text[i] + mac_text[j];
+			System.out.println("plusIp내용 : " + plusIP_mac);
 			System.out.println("전체부팅 버튼 함수 아이피 : " + ip_text[i]);
 			System.out.println("전체부팅 버튼 함수 맥 : " + mac_text[j]);
-			
+//			ip_mac.add(plusIP_mac[i]); // 텍스트에서 가져온 아이피들 리스트에 추가함
 			ip_mac.add(plusIP_mac); // 텍스트에서 가져온 아이피들 리스트에 추가함
-	
 			
 		} 
 		System.out.println("전체부팅 버튼 리스트 : " + ip_mac);
 		System.out.println("전체부팅 버튼 리스트 길이 : " + ip_mac.size());
-		return ip_mac;
+		 return ip_mac; // 아이피 리스트 리턴
 	}
-	
-	
 @Override
 	public void actionPerformed(ActionEvent e) { // 전체부팅 버튼 액션
 		System.out.println("전체부팅 액션 호출 - 이 액션 안씀");

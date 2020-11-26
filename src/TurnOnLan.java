@@ -2,7 +2,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -14,31 +16,40 @@ class TurnOnLan{
 		System.out.println("전체부팅 함수 호출");
 		List<String> SplitIpList = new ArrayList<String> ();
 		GetSet_IP_Mac GetAlliplist = new GetSet_IP_Mac();
+
+	//	SplitIpList.addAll(GetAlliplist.getAllip_mac());
 		
-		  
+			// String[] ipStr = GetAlliplist.getAllip_mac().split(" "); 
 		
-	//   List <String> ipStr = new ArrayList<String>();
-	  // String[] ipStr = GetAlliplist.getAllip_mac().split(" "); 
-	 Object[] ipStr =  GetAlliplist.getAllip_mac().toArray();
+			String[] ipStr = (String[]) GetAlliplist.getAllip_mac().toArray(); // 리스트 타입을 오브젝트에 배열로 저장
+			System.out.println("ipStr 내용 : " + GetAlliplist.getAllip_mac().toString());
 /*		    String[] ipStr = new String[5]; // 잠시 임시로 해놈
 		    String[] macStr = new String[5];*/
-		    
+		    System.out.println("스트링 내용 " + ipStr.toString());
 	    // String[] macStr = GetAlliplist.getMac().split(" ");
-	Object[] macStr = GetAlliplist.getAllip_mac().toArray();
-	
-	    
-	    
-		SplitIpList.addAll(GetAlliplist.getAllip_mac()); // 리스트 + 리스트 타입이라 addAll로 됨 
+		
+		    String[] macStr = (String[]) GetAlliplist.getAllip_mac().toArray();
+/*		    String test = "test";
+String[] macStr = new String[1];
+macStr[0] = "testmac";*/
 
+	//	SplitIpList.addAll(GetAlliplist.getAllip_mac()); // 리스트 + 리스트 타입이라 addAll로 됨 
+		    
+		System.out.println("ipstr길이 : " + ipStr.length);
 	        
 		 try {
-		
-		     
-			 System.out.println("TurnOnAllLan 나눈 아이피 : " + ipStr[0]);
+			 GetSet_IP_Mac ip = new GetSet_IP_Mac();
+				
+				for (int k = 0; k<=ipStr.length; k+=2) { 	
+				System.out.println("for문 호출 : " + k);
+					int j =0;
+					j = k+1; // j에다 i값 플러스
+					
+			 System.out.println("TurnOnAllLan 나눈 아이피 : " + ipStr[k]);
 			 
-			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[1]);
+			 System.out.println("TurnOnAllLan 나눈 맥주소 : " + macStr[j]);
 			
-	            byte[] macBytes = getMacBytes((String) macStr[1]); // String타입으로 캐스팅
+	            byte[] macBytes = getMacBytes((String) macStr[k]); // String타입으로 캐스팅
 	            byte[] bytes = new byte[6 + 16 * macBytes.length];
 	            for (int i = 0; i < 6; i++) {
 	                bytes[i] = (byte) 0xff;
@@ -47,9 +58,9 @@ class TurnOnLan{
 	                System.arraycopy(macBytes, 0, bytes, i, macBytes.length);
 	            }
 	            
-	            InetAddress address = InetAddress.getByName((String) ipStr[0]);
+	            InetAddress address = InetAddress.getByName((String) ipStr[k]);
 	            System.out.println("TurnOnAllLan 들어온 아이피 " + address);
-	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[0]);
+	            System.out.println("TurnOnAllLan 들어온 맥 주소 " + macStr[j]);
 	            DatagramPacket packet = new DatagramPacket(bytes, bytes.length, address, PORT);
 	            DatagramSocket socket = new DatagramSocket();
 	            socket.send(packet);
@@ -57,10 +68,11 @@ class TurnOnLan{
 	            
 	            System.out.println("TurnOnAllLan Wake-on-LAN 패킷 전송 ");
 	            System.out.println("TurnOnAllLan 전송 아이피 : " + ipStr);
-	            System.out.println("TurnOnAllLan 전송 맥주소 " + macStr[1]);
+	            System.out.println("TurnOnAllLan 전송 맥주소 " + macStr[k]);
 	            // 프로그램 실행하면서 로딩한 아이피 보여주기
 	    	 	// 나중에 어떤 txt 파일을 읽어서 텍스트 필드로 보여주는 걸로 바꿀 예정 
 	        }
+		 } // for문
 	        catch (Exception e) {
 	            System.out.println("TurnOnAllLan 패킷 전송 실패 맥주소나 아이피 주소 확인 바람 : " + e);
 	          // System.exit(1); // 강제 종료말고 alert창 띄울 수 있으면 alert로 할 예정
